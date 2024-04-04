@@ -5,7 +5,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Tag;
 using Content.Server.Popups;
-using static Content.Server.Chemistry.EntitySystems.ChemistrySystem;
+using Content.Shared.Chemistry;
 
 namespace Content.Server.Chemistry.EntitySystems
 {
@@ -20,9 +20,7 @@ namespace Content.Server.Chemistry.EntitySystems
         private void OnCheck(EntityUid uid, AutoinjectorComponent component, AfterHypoEvent args)
         {
             if (!_solutionContainerSystem.TryGetSolution(uid, component.Solution, out _, out var solutions))
-            {
                 return;
-            }
 
             if (solutions.Volume <= 0)
             {

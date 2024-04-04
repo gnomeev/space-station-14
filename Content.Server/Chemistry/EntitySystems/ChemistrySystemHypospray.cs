@@ -1,5 +1,6 @@
 using Content.Server.Chemistry.Components;
 using Content.Server.Chemistry.Containers.EntitySystems;
+using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
@@ -168,19 +169,6 @@ namespace Content.Server.Chemistry.EntitySystems
                 ? entMan.HasComponent<SolutionContainerManagerComponent>(entity) &&
                   entMan.HasComponent<MobStateComponent>(entity)
                 : entMan.HasComponent<SolutionContainerManagerComponent>(entity);
-        }
-        [ByRefEvent]
-        public readonly struct AfterHypoEvent
-        {
-            public readonly EntityUid User;
-
-            public readonly EntityUid Target;
-
-            public AfterHypoEvent(EntityUid user, EntityUid target)
-            {
-                User = user;
-                Target = target;
-            }
         }
     }
 }
