@@ -226,3 +226,11 @@
     Steel: 600
     Plastic: 300
 
+- type: latheRecipe
+  id: MedAutoinjectorr
+  result: MedAutoinjector
+  completetime: 2
+  materials:
+    Glass: 200
+    Plastic: 200
+

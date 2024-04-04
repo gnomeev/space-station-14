@@ -16,7 +16,6 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.GameStates;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-
 namespace Content.Server.Chemistry.EntitySystems
 {
     public sealed partial class ChemistrySystem
@@ -149,6 +148,10 @@ namespace Content.Server.Chemistry.EntitySystems
 
             var ev = new TransferDnaEvent { Donor = target.Value, Recipient = uid };
             RaiseLocalEvent(target.Value, ref ev);
+            var afterhypoev = new AfterHypoEvent (hypo, target.Value);
+            RaiseLocalEvent(hypo, ref afterhypoev);
+
+
 
             // same LogType as syringes...
             _adminLogger.Add(LogType.ForceFeed, $"{_entMan.ToPrettyString(user):user} injected {_entMan.ToPrettyString(target.Value):target} with a solution {SolutionContainerSystem.ToPrettyString(removedSolution):removedSolution} using a {_entMan.ToPrettyString(uid):using}");
@@ -165,6 +168,19 @@ namespace Content.Server.Chemistry.EntitySystems
                 ? entMan.HasComponent<SolutionContainerManagerComponent>(entity) &&
                   entMan.HasComponent<MobStateComponent>(entity)
                 : entMan.HasComponent<SolutionContainerManagerComponent>(entity);
+        }
+        [ByRefEvent]
+        public readonly struct AfterHypoEvent
+        {
+            public readonly EntityUid User;
+
+            public readonly EntityUid Target;
+
+            public AfterHypoEvent(EntityUid user, EntityUid target)
+            {
+                User = user;
+                Target = target;
+            }
         }
     }
 }
