@@ -17,6 +17,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.GameStates;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+
 namespace Content.Server.Chemistry.EntitySystems
 {
     public sealed partial class ChemistrySystem

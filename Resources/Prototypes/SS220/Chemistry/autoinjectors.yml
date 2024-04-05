@@ -3,6 +3,7 @@
   parent: BaseItem
   description: уээээ
   id: BaseAutoinjectorss220
+  abstract: true
   components:
   - type: Sprite
     sprite: Objects/Specific/Medical/medipen.rsi
@@ -40,8 +41,7 @@
   - type: Sprite
     sprite: Objects/Specific/Medical/medipen.rsi
     layers:
-    - state: firstaid
-      map: ["enum.SolutionContainerLayers.Fill"]
+    - state: medautoinjector
   - type: Item
     sprite: Objects/Specific/Medical/medipen.rsi
     size: Tiny
@@ -57,9 +57,5 @@
   - type: RefillableSolution
     solution: pen
   - type: Appearance
-  - type: SolutionContainerVisuals
-    maxFillLevels: 1
-    changeColor: false
-    emptySpriteName: firstaid_empty
   - type: Autoinjector
     solution: pen
