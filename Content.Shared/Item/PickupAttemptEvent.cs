@@ -28,3 +28,17 @@ public class BasePickupAttemptEvent : CancellableEntityEventArgs
         Item = item;
     }
 }
+
+//ss220 cult update begin
+public sealed partial class PickupVerbAttempt : CancellableEntityEventArgs
+{
+    public EntityUid User;
+    public EntityUid Item;
+
+    public PickupVerbAttempt(EntityUid user, EntityUid item)
+    {
+        User = user;
+        Item = item;
+    }
+}
+//ss220 cult update end

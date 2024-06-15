@@ -107,7 +107,6 @@ public abstract class SharedItemSystem : EntitySystem
         verb.Act = () => _handsSystem.TryPickupAnyHand(args.User, args.Target, checkActionBlocker: false,
             handsComp: args.Hands, item: component);
         verb.Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/pickup.svg.192dpi.png"));
-
         // if the item already in a container (that is not the same as the user's), then change the text.
         // this occurs when the item is in their inventory or in an open backpack
         Container.TryGetContainingContainer(args.User, out var userContainer);
@@ -115,7 +114,13 @@ public abstract class SharedItemSystem : EntitySystem
             verb.Text = Loc.GetString("pick-up-verb-get-data-text-inventory");
         else
             verb.Text = Loc.GetString("pick-up-verb-get-data-text");
+        //ss220 cult start
+        var ev = new PickupVerbAttempt(args.User, args.Target);
+        RaiseLocalEvent(args.Target, ev);
 
+        if (ev.Cancelled)
+            return;  // it's maybe bad way to solve problem with pick up from slot idk
+        //ss220 cult end
         args.Verbs.Add(verb);
     }
 

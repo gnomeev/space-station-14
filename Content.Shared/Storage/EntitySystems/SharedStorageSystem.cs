@@ -19,6 +19,7 @@ using Content.Shared.Lock;
 using Content.Shared.Materials;
 using Content.Shared.Placeable;
 using Content.Shared.Popups;
+using Content.Shared.SS220.SharedAntagItem;
 using Content.Shared.Stacks;
 using Content.Shared.Storage.Components;
 using Content.Shared.Timing;
@@ -646,6 +647,11 @@ public abstract class SharedStorageSystem : EntitySystem
 
         if (!TryComp<StorageComponent>(storageEnt, out var storageComp))
             return;
+
+        //ss220 cult begin
+        if (HasComp<AntagStorageComponent>(storageEnt))
+            return;
+        //ss220 cult end
 
         if (!_ui.IsUiOpen(storageEnt, StorageComponent.StorageUiKey.Key, player))
             return;
