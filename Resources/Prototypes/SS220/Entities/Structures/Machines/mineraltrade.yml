@@ -1,0 +1,51 @@
+- type: entity
+  id: MineralTrade
+  name: MineralTradeTerminal
+  description: nword
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: PhysicalClock
+  - type: Sprite
+    sprite: SS220/Structures/Furniture/clocks.rsi
+    noRot: true
+    layers:
+    - state: clocks
+  - type: Transform
+    anchored: true
+  - type: Clickable
+  - type: Damageable
+    damageContainer: Inorganic
+    damageModifierSet: Wood
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Anchorable
+    delay: 2
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.5,0.25,0.5"
+        density: 100
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: ActivatableUI
+    key: enum.MineralTradeTerminalUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.MineralTradeTerminalUiKey.Key:
+        type: MineralTradeBoundUI
+  - type: MineralTrade
+    availableListing:
+    - TradeGoldListing

@@ -1,0 +1,14 @@
+<PanelContainer xmlns="https://spacestation14.io"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+                 RectClipContent="True"
+                 >
+    <BoxContainer Orientation="Horizontal">
+        <SpriteView Scale="1 1" Name="MaterialView"  HorizontalAlignment="Left" Margin=" 15 0 15 0"/>
+        <Label Text="material-name-placeholder" Name="MaterialName" HorizontalAlignment="Right" Access="Public"/>
+        <Label Text="price-placeholder" Name="MaterialPrice" Margin="15 0 0 0" HorizontalAlignment="Right" Access="Public"/>
+        <TextureRect TexturePath="/Textures/SS220/Interface/Misc/sponsor_cash.png" HorizontalAlignment="Right" Margin="0 5 0 0"/>
+        <Button Text="+" Name="BuyButton" HorizontalAlignment="Right" Margin="0 5"></Button>
+        <Button Text="-" Name="SellButton" HorizontalAlignment="Right" Margin="0 5"></Button>
+    </BoxContainer>
+</PanelContainer>

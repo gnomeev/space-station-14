@@ -1,0 +1,5 @@
+- type: mineralListing
+  id: TradeGoldListing
+  name: Золотишко
+  price: 150
+  listingEntityId: IngotGold
