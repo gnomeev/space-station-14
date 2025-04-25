@@ -28,3 +28,14 @@ public sealed class AddToCartMsg : BoundUserInterfaceMessage
         Id = id;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed class CheckoutMsg : BoundUserInterfaceMessage
+{
+    public List<MineralListingPrototype> Checkout;
+
+    public CheckoutMsg(List<MineralListingPrototype> checkout)
+    {
+        Checkout = checkout;
+    }
+}

@@ -8,6 +8,8 @@
         <Label Text="material-name-placeholder" Name="MaterialName" HorizontalAlignment="Right" Access="Public"/>
         <Label Text="price-placeholder" Name="MaterialPrice" Margin="15 0 0 0" HorizontalAlignment="Right" Access="Public"/>
         <TextureRect TexturePath="/Textures/SS220/Interface/Misc/sponsor_cash.png" HorizontalAlignment="Right" Margin="0 5 0 0"/>
+        <Label Text="99" Name="AmountInStorage"></Label>
+        <LineEdit Name="AmountLineEdit" Text="Amount" Margin="15 0" HorizontalExpand="True"></LineEdit>
         <Button Text="+" Name="BuyButton" HorizontalAlignment="Right" Margin="0 5"></Button>
         <Button Text="-" Name="SellButton" HorizontalAlignment="Right" Margin="0 5"></Button>
     </BoxContainer>

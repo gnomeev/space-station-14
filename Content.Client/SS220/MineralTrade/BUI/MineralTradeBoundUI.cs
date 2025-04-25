@@ -29,6 +29,11 @@ public sealed class MineralTradeBoundUI : BoundUserInterface
             _isProcessing = true;
             SendMessage(new AddToCartMsg(who));
         };
+
+        _window.CartCheckout += (who) =>
+        {
+            SendMessage(new CheckoutMsg(who));
+        };
     }
 
     protected override void Dispose(bool disposing)

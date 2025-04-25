@@ -10,6 +10,7 @@ namespace Content.Client.SS220.MineralTrade.UI;
 public sealed partial class MineralTradeTerminal : FancyWindow
 {
     public Action<string>? AddToCart;
+    public Action<List<MineralListingPrototype>>? CartCheckout;
 
     public MineralTradeTerminal()
     {
@@ -41,6 +42,8 @@ public sealed partial class MineralTradeTerminal : FancyWindow
         {
             var card = new MineralTradeItemCard();
             card.SetItem(listing);
+
+            CheckoutButton.OnPressed += _ => CartCheckout?.Invoke(listingPrototypes);
 
             CheckoutList.AddChild(card);
         }

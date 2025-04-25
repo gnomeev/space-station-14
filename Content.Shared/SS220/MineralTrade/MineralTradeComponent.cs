@@ -10,6 +10,12 @@ public sealed partial class MineralTradeComponent : Component
     [DataField]
     public List<MineralListingPrototype> AvailableListings = new();
 
+    /// <summary>
+    /// for comic effect
+    /// </summary>
+    [DataField]
+    public bool ShouldThrow;
+
     public List<MineralListingPrototype> Checkout = new();
 
     public int Balance;

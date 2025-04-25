@@ -23,6 +23,42 @@ public sealed partial class MineralTradeSystem : EntitySystem
         SubscribeLocalEvent<MineralTradeComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<MineralTradeComponent, BoundUIOpenedEvent>(OnBUIOpen);
         SubscribeLocalEvent<MineralTradeComponent, AddToCartMsg>(OnAddToCart);
+        SubscribeLocalEvent<MineralTradeComponent, CheckoutMsg>(OnCheckout);
+    }
+
+    private void OnCheckout(Entity<MineralTradeComponent> ent, ref CheckoutMsg args)
+    {
+        var station = _station.GetOwningStation(ent);
+
+        if (!TryComp<StationBankAccountComponent>(station, out var bank))
+            return;
+
+        var finalPrice = 0;
+        List<MineralListingPrototype> validProtos = new();
+
+        foreach (var proto in args.Checkout)
+        {
+            if (proto.Price is null)
+                continue;
+
+            finalPrice -= proto.Price.Value;
+            validProtos.Add(proto);
+        }
+
+        if ((finalPrice - ent.Comp.Balance) < ent.Comp.Balance)
+            return;
+
+        _cargo.UpdateBankAccount(station.Value, bank, finalPrice);
+        Dirty(ent, ent.Comp);
+
+        foreach (var proto in validProtos)
+        {
+            if(!_proto.TryIndex(proto.ID, out var entity))
+                return;
+
+            if (!ent.Comp.ShouldThrow)
+                Spawn(proto.ID);
+        }
     }
 
     private void OnAddToCart(Entity<MineralTradeComponent> ent, ref AddToCartMsg args)
