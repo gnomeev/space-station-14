@@ -1,5 +1,7 @@
+using System.Linq;
 using Content.Server.Cargo.Components;
 using Content.Server.Cargo.Systems;
+using Content.Server.Popups;
 using Content.Server.Station.Systems;
 using Content.Shared.SS220.MineralTrade;
 using Content.Shared.SS220.MineralTrade.Events;
@@ -7,6 +9,7 @@ using Content.Shared.SS220.MineralTrade.Protos;
 using Robust.Server.GameObjects;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server.SS220.MineralTrade;
 
@@ -17,6 +20,9 @@ public sealed partial class MineralTradeSystem : EntitySystem
     [Dependency] private readonly UserInterfaceSystem  _ui = default!;
     [Dependency] private readonly CargoSystem _cargo = default!;
     [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -30,35 +36,31 @@ public sealed partial class MineralTradeSystem : EntitySystem
     {
         var station = _station.GetOwningStation(ent);
 
-        if (!TryComp<StationBankAccountComponent>(station, out var bank))
+        if (station is null || !TryComp<StationBankAccountComponent>(station, out var bank))
             return;
 
-        var finalPrice = 0;
-        List<MineralListingPrototype> validProtos = new();
+        var finalPrice = args.Checkout.Sum(x => x.Key.Price * x.Value);
 
-        foreach (var proto in args.Checkout)
+        if (finalPrice > ent.Comp.Balance)
         {
-            if (proto.Price is null)
+            _popup.PopupEntity("Недостаточно средств", ent.Owner);
+            return;
+        }
+
+        foreach (var (proto, amount) in args.Checkout)
+        {
+            if(!_proto.HasIndex(proto.ID))
                 continue;
 
-            finalPrice -= proto.Price.Value;
-            validProtos.Add(proto);
+            for (var i = 0; i < amount; i++)
+            {
+                Spawn(proto.ID, Transform(ent).Coordinates);
+            }
         }
-
-        if ((finalPrice - ent.Comp.Balance) < ent.Comp.Balance)
-            return;
 
         _cargo.UpdateBankAccount(station.Value, bank, finalPrice);
-        Dirty(ent, ent.Comp);
-
-        foreach (var proto in validProtos)
-        {
-            if(!_proto.TryIndex(proto.ID, out var entity))
-                return;
-
-            if (!ent.Comp.ShouldThrow)
-                Spawn(proto.ID);
-        }
+        ent.Comp.Balance -= finalPrice;
+        UpdateState(ent, ent.Comp);
     }
 
     private void OnAddToCart(Entity<MineralTradeComponent> ent, ref AddToCartMsg args)
@@ -66,7 +68,9 @@ public sealed partial class MineralTradeSystem : EntitySystem
         if (!_proto.TryIndex<MineralListingPrototype>(args.Id, out var proto))
             return;
 
-        ent.Comp.Checkout.Add(proto);
+        if (!ent.Comp.Checkout.TryAdd(proto, args.Amount))
+            ent.Comp.Checkout[proto] = 1;
+
         UpdateState(ent.Owner, ent.Comp);
     }
 

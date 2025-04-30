@@ -7,10 +7,10 @@ namespace Content.Shared.SS220.MineralTrade.Events;
 public sealed class MineralTradeState : BoundUserInterfaceState
 {
     public List<MineralListingPrototype> Listings;
-    public List<MineralListingPrototype> Checkout;
+    public Dictionary<MineralListingPrototype, int> Checkout;
     public int Balance;
 
-    public MineralTradeState(List<MineralListingPrototype> listings, List<MineralListingPrototype> checkout, int balance)
+    public MineralTradeState(List<MineralListingPrototype> listings, Dictionary<MineralListingPrototype, int> checkout, int balance)
     {
         Listings = listings;
         Checkout = checkout;
@@ -22,19 +22,21 @@ public sealed class MineralTradeState : BoundUserInterfaceState
 public sealed class AddToCartMsg : BoundUserInterfaceMessage
 {
     public string Id;
+    public int Amount;
 
-    public AddToCartMsg(string id)
+    public AddToCartMsg(string id, int amount)
     {
         Id = id;
+        Amount = amount;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class CheckoutMsg : BoundUserInterfaceMessage
 {
-    public List<MineralListingPrototype> Checkout;
+    public Dictionary<MineralListingPrototype, int> Checkout;
 
-    public CheckoutMsg(List<MineralListingPrototype> checkout)
+    public CheckoutMsg(Dictionary<MineralListingPrototype, int> checkout)
     {
         Checkout = checkout;
     }

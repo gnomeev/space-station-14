@@ -21,13 +21,13 @@ public sealed class MineralTradeBoundUI : BoundUserInterface
         _window.OpenCentered();
         _window.OnClose += Close;
 
-        _window.AddToCart += (who) =>
+        _window.AddToCart += (what, amount) =>
         {
             if (_isProcessing)
                 return;
 
             _isProcessing = true;
-            SendMessage(new AddToCartMsg(who));
+            SendMessage(new AddToCartMsg(what, amount));
         };
 
         _window.CartCheckout += (who) =>

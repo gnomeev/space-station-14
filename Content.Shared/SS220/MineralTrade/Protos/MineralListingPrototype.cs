@@ -14,7 +14,7 @@ public sealed class MineralListingPrototype : IPrototype
     public LocId? Name;
 
     [DataField]
-    public int? Price;
+    public int Price = 0;
 
     [DataField]
     public EntProtoId? ListingEntityId = default!;

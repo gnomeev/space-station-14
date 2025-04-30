@@ -1,10 +1,10 @@
 using Content.Shared.SS220.MineralTrade.Protos;
-using Robust.Shared.Containers;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.MineralTrade;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class MineralTradeComponent : Component
 {
     [DataField]
@@ -14,9 +14,9 @@ public sealed partial class MineralTradeComponent : Component
     /// for comic effect
     /// </summary>
     [DataField]
-    public bool ShouldThrow;
+    public bool ShouldThrow = false;
 
-    public List<MineralListingPrototype> Checkout = new();
+    public Dictionary<MineralListingPrototype, int> Checkout = new();
 
     public int Balance;
 }

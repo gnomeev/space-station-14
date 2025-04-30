@@ -12,10 +12,11 @@ public sealed partial class MineralTradeItemCard : PanelContainer
 {
     [Dependency] private readonly IEntityManager _entMan = default!;
 
-    public Action<string>? OnBuy;
-    public Action<string>? OnSell;
-    private EntityUid? _materialInstance;
+    public Action<string, int>? OnBuy;
+    public Action<string, int>? OnSell;
     public bool CheckoutCard = false;
+    public EntProtoId? ProtoId;
+    private int _amount = 0;
 
     public MineralTradeItemCard()
     {
@@ -28,13 +29,13 @@ public sealed partial class MineralTradeItemCard : PanelContainer
     {
         if (proto.ListingEntityId != null)
         {
+            ProtoId = proto.ListingEntityId;
+
             if (proto.Name != null)
                 MaterialName.Text = Loc.GetString(proto.Name);
 
             MaterialPrice.Text = proto.Price.ToString();
-
-            _materialInstance = _entMan.SpawnEntity(proto.ListingEntityId, MapCoordinates.Nullspace);
-            MaterialView.SetEntity(_materialInstance);
+            MaterialView.SetPrototype(proto.ListingEntityId);
 
             if (CheckoutCard)
             {
@@ -44,13 +45,23 @@ public sealed partial class MineralTradeItemCard : PanelContainer
 
             BuyButton.OnPressed += (_) =>
             {
-                OnBuy ?.Invoke(proto.ID);
+                OnBuy ?.Invoke(proto.ID, _amount);
             };
 
             SellButton.OnPressed += (_) =>
             {
-                OnSell ?.Invoke(proto.ID);
+                OnSell ?.Invoke(proto.ID, _amount);
             };
+
+            AmountLineEdit.OnTextChanged += OnAmountChanged;
         }
+    }
+
+    private void OnAmountChanged(LineEdit.LineEditEventArgs args)
+    {
+        if (!int.TryParse(args.Text, out var amount))
+            return;
+
+        _amount = amount;
     }
 }
