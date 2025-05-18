@@ -146,3 +146,35 @@
       - TraitorRole
       - NukeOperative
 
+- type: entity
+  parent: BaseSubdermalImplant
+  id: StealthImplant
+  name: stealth-implant
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SubdermalImplant
+    implantAction: ActionActivateStealthImplant
+  - type: TriggerImplantAction
+  - type: ThermalVisionImplant
+  - type: Tag
+    tags:
+    - StealthImplant
+  - type: HiddenDescription
+    entries:
+    - label: corvax-hidden-desc-IllegalImplants-medical
+      jobRequired:
+      - Paramedic
+      - MedicalDoctor
+      - SeniorPhysician
+      - ChiefMedicalOfficer
+      - Brigmedic
+    - label: hidden-desc-ThermalVisorImplanter-research
+      jobRequired:
+      - ResearchAssistant
+      - ResearchDirector
+      - Scientist
+      - Borg
+    - label: hidden-desc-ThermalGoogles-syndicate
+      whitelistMindRoles:
+      - TraitorRole
+      - NukeOperative

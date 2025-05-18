@@ -32,3 +32,10 @@
   components:
   - type: Implanter
     implant: AdrenalImplant
+
+- type: entity
+  id: StealthImplanter
+  parent: BaseImplantOnlyImplanterSyndi
+  components:
+  - type: Implanter
+    implant: StealthImplant
