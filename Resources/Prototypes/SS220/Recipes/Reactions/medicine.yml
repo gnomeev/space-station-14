@@ -63,4 +63,29 @@
     Sugar:
       amount: 1
   products:
-    Cerebrin: 2   
+    Cerebrin: 2
+
+- type: reaction
+  id: Luxoderm
+  reactants:
+    Phalanximine:
+      amount: 1
+    Dermaline:
+      amount: 1
+  products:
+    Luxoderm: 2
+
+- type: reaction
+  id: VisibilityChangeReaction
+  impact: High
+  priority: 20
+  reactants:
+    Aluminium:
+      amount: 1
+    Potassium:
+      amount: 1
+    Luxoderm:
+      amount: 1
+  effects:
+  - !type:FlashReactionEffect
+  - !type: VisibilityChangeReaction

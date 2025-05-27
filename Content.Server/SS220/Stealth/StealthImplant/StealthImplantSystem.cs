@@ -20,28 +20,35 @@ public sealed class StealthImplantSystem : EntitySystem
     private void OnImplantUse(Entity<StealthImplantComponent> ent, ref UseStealthImplantEvent args)
     {
         if (!HasComp<StealthComponent>(args.Performer))
-        {
             EnsureComp<StealthComponent>(args.Performer);
-        }
+
+        args.Handled = true;
+        _stealth.SetEnabled(args.Performer, true);
+        _stealth.SetVisibility(args.Performer, ent.Comp.Visibility);
     }
 
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-
         var query = EntityQueryEnumerator<StealthImplantComponent, SubdermalImplantComponent>();
 
-        while (query.MoveNext(out _, out var stealth, out var implant))
+        while (query.MoveNext(out _, out var stealthImplant, out var implant))
         {
-            var user = implant.user;
-            if (user is not null && TryComp<StealthComponent>(user, out var stealthComponent) && stealthComponent.Enabled)
-            {
-                var time = _timing.CurTime + stealth.StealthTime;
+            if (implant.user is not {} user)
+                continue;
 
-                if (_timing.CurTime > time)
-                {
-                    _stealth.SetEnabled(user.Value, !stealthComponent.Enabled, stealthComponent);
-                }
+            if (!TryComp<StealthComponent>(user, out var stealthComponent) || !stealthComponent.Enabled)
+                continue;
+
+            var curTime = _timing.CurTime;
+
+            if (stealthImplant.LastStealthTime <= TimeSpan.Zero)
+                stealthImplant.LastStealthTime = curTime + stealthImplant.StealthTime;
+
+            if (curTime > stealthImplant.LastStealthTime)
+            {
+                _stealth.SetEnabled(user, false, stealthComponent);
+                stealthImplant.LastStealthTime = TimeSpan.Zero;
             }
         }
     }

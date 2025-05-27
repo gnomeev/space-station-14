@@ -7,6 +7,9 @@ namespace Content.Shared.SS220.Stealth.StealthImplant;
 public sealed partial class StealthImplantComponent : Component
 {
     [DataField]
+    public float Visibility = -0.75f;
+
+    [DataField]
     public TimeSpan StealthTime = TimeSpan.FromSeconds(8);
 
     [DataField]

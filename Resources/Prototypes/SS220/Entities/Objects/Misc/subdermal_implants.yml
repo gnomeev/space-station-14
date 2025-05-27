@@ -155,10 +155,7 @@
   - type: SubdermalImplant
     implantAction: ActionActivateStealthImplant
   - type: TriggerImplantAction
-  - type: ThermalVisionImplant
-  - type: Tag
-    tags:
-    - StealthImplant
+  - type: StealthImplant
   - type: HiddenDescription
     entries:
     - label: corvax-hidden-desc-IllegalImplants-medical

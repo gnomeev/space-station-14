@@ -35,6 +35,8 @@
 
 - type: entity
   id: StealthImplanter
+  name: Stealth Skin Implanter
+  description: Keep waiting, ya?
   parent: BaseImplantOnlyImplanterSyndi
   components:
   - type: Implanter

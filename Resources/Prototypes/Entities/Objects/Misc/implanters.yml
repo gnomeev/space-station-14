@@ -46,6 +46,7 @@
       - MindShieldImplant
       - FakeMindShieldImplant
       - RadioImplant
+      - StealthImplant # SS220 Stealth Implant update
       deimplantFailureDamage:
         types:
           Cellular: 50
