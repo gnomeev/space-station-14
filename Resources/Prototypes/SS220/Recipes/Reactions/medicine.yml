@@ -82,10 +82,8 @@
   reactants:
     Aluminium:
       amount: 1
-    Potassium:
-      amount: 1
     Luxoderm:
       amount: 1
   effects:
   - !type:FlashReactionEffect
-  - !type: VisibilityChangeReaction
+  - !type:VisibilityChangeReaction

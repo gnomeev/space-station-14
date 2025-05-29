@@ -9,7 +9,7 @@ namespace Content.Server.SS220.EntityEffects.Effects;
 public sealed partial class VisibilityChangeReaction : EntityEffect
 {
     [DataField]
-    public float RangePerUnit = 0.05f;
+    public float RangePerUnit = 0.3f;
 
     [DataField]
     public float MaxRange = 20f;
@@ -36,14 +36,12 @@ public sealed partial class VisibilityChangeReaction : EntityEffect
             if (!args.EntityManager.HasComponent<StealthComponent>(ent))
                 args.EntityManager.EnsureComponent<StealthComponent>(ent);
 
-            if (args.EntityManager.TryGetComponent<StealthComponent>(args.TargetEntity, out var stealth))
+            if (args.EntityManager.TryGetComponent<StealthComponent>(ent, out var stealth))
             {
-                var effectVisibility = stealthSystem.GetVisibility(args.TargetEntity, stealth) + VisibilityChange;
+                var effectVisibility = stealthSystem.GetVisibility(ent, stealth) + VisibilityChange;
                 stealthSystem.SetVisibility(ent, effectVisibility, stealth);
             }
         }
-
-
     }
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {
