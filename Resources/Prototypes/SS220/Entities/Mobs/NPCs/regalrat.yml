@@ -19,9 +19,10 @@
   name: Rummage
   description: Rummage trash to find some cheesy-cheese.
   components:
-  - type: EntityTargetAction
+  - type: Action
     itemIconStyle: BigAction
     icon:
       sprite: SS220/Interface/Actions/actions_rat_king.rsi
       state: ratKingRummage
+  - type: EntityTargetAction
     event: !type:RatKingRummageActionEvent

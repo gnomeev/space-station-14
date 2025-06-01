@@ -33,6 +33,7 @@ using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
 using Robust.Shared.Utility;
+using Content.Shared.Actions.Components;
 
 namespace Content.Shared.SS220.DarkReaper;
 
@@ -315,7 +316,7 @@ public abstract class SharedDarkReaperSystem : EntitySystem
             if (IsPaused(uid))
                 continue;
 
-            if (_net.IsServer && _actions.TryGetActionData(comp.MaterializeActionEntity, out var materializeData, false))
+            if (_net.IsServer && TryComp<ActionComponent>(comp.MaterializeActionEntity, out var materializeData))
             {
                 var visibleEyes = materializeData.Cooldown.HasValue &&
                 materializeData.Cooldown.Value.End > _timing.CurTime &&
