@@ -567,11 +567,6 @@
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi
   #SS220-surgery-resprite end
-  - type: HideLayerClothing
-    layers:
-      Hair: HEAD
-      HeadTop : HEAD
-      HeadSide : HEAD
   - type: Tag
     tags:
     - ClothMade

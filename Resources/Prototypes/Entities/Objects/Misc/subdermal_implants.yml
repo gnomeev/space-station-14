@@ -451,22 +451,6 @@
         - NukeOperative
     # hidden-desc-begin
 
-- type: entity
-  categories: [ HideSpawnMenu, Spawner ]
-  parent: BaseSubdermalImplant
-  id: ChameleonControllerImplant
-  name: chameleon controller implant
-  description: This implant allows you to instantly change the appearance of all worn chameleon clothing.
-  components:
-  - type: ChameleonControllerImplant
-  - type: SubdermalImplant
-    implantAction: ActionChameleonController
-  - type: UseDelay
-    delay: 1
-  - type: UserInterface
-    interfaces:
-      enum.ChameleonControllerKey.Key:
-        type: ChameleonControllerBoundUserInterface
 
 - type: entity
   categories: [ HideSpawnMenu, Spawner ]

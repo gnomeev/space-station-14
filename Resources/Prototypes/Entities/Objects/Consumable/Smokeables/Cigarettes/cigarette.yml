@@ -476,9 +476,9 @@
           Quantity: 10
 
 - type: entity
-  id: CigaretteFrezon
+  id: CigaretteBlackPepper
   parent: SoakedCigarette
-  name: Atmospheric Adventure
+  name: English Spice
   components:
   - type: SolutionContainerManager
     solutions:
