@@ -51,6 +51,9 @@ namespace Content.Client.Access.UI
             _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
             _maxIdJobLength = _cfgManager.GetCVar(CCVars.MaxIdJobLength);
 
+            _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
+            _maxIdJobLength = _cfgManager.GetCVar(CCVars.MaxIdJobLength);
+
             FullNameLineEdit.OnTextEntered += _ => SubmitData();
             FullNameLineEdit.IsValid = s => s.Length <= _maxNameLength;
             FullNameLineEdit.OnTextChanged += _ =>

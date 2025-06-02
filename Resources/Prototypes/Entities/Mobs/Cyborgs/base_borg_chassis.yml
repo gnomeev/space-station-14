@@ -275,6 +275,13 @@
 
 - type: entity
   abstract: true
+  parent: BaseBorgChassisNotIonStormable
+  id: BaseBorgChassis
+  components:
+  - type: IonStormTarget
+
+- type: entity
+  abstract: true
   id: BaseBorgTransponder
   components:
   - type: BorgTransponder
