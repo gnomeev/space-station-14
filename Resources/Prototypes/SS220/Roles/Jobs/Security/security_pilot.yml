@@ -41,8 +41,8 @@
     - DrinkRelaxingPeachCan
 
 - type: chameleonOutfit
-  id: SecurityOfficerChameleonOutfit
-  job: SecurityOfficer
+  id: SecurityPilotChameleonOutfit
+  job: SecurityPilot
   hasMindShield: true
   equipment:
     head: ClothingHeadHatBeretSecurity

@@ -190,7 +190,7 @@
               - CartridgePistol
     - type: MagazineVisuals
       magState: mag
-      steps: 5
+      steps: 1 # SS220-fix-for-our-sprites
       zeroVisible: true
     - type: Appearance
 

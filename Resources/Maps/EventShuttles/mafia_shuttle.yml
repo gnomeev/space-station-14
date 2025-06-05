@@ -29,9 +29,7 @@ entities:
     - type: Transform
     - type: Map
       mapPaused: True
-    - type: PhysicsMap
     - type: GridTree
-    - type: MovedGrids
     - type: Broadphase
     - type: OccluderTree
     - type: LoadedMap
@@ -673,14 +671,6 @@ entities:
     - type: Transform
       pos: 10.492183,-16.468414
       parent: 2
-- proto: ActionSleep
-  entities:
-  - uid: 1090
-    components:
-    - type: Transform
-      parent: 1089
-    - type: InstantAction
-      container: 1089
 - proto: ActionToggleLight
   entities:
   - uid: 939
@@ -3987,14 +3977,6 @@ entities:
     - type: Transform
       pos: 3.5,-4.5
       parent: 2
-    - type: HealOnBuckle
-      sleepAction: 1090
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 1090
 - proto: DoorRemoteService
   entities:
   - uid: 1155

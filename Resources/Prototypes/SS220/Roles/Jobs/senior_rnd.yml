@@ -21,8 +21,8 @@
     ears: ClothingHeadsetScience
 
 - type: chameleonOutfit
-  id: ScientistChameleonOutfit
-  job: Scientist
+  id: SeniorResearcherChameleonOutfit
+  job: SeniorResearcher
   equipment:
     head: ClothingHeadBandSkull
     eyes: ClothingEyesGlassesSunglasses
