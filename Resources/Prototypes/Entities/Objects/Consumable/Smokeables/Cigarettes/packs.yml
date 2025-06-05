@@ -159,7 +159,7 @@
   - type: Item
     sprite: Objects/Consumable/Smokeables/Cigarettes/Packs/red.rsi
     #SS220 Cigarettes rework start
-  - type: StorageFill 
+  - type: StorageFill
     contents:
     - id: CigaretteDromedaryCo
       amount: 10

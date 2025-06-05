@@ -452,7 +452,7 @@
     - state: base
       map: ["enum.StorageVisualLayers.Base"]
     #SS220 Shelfs Resprite begin
-    # - state: unlocked  
+    # - state: unlocked
     #   shader: unshaded
     #- state: chem-0
     #- map: ["enum.StorageFillLayers.Fill"]

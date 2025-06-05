@@ -513,10 +513,10 @@ namespace Content.Server.GameTicking
             _adminLogger.Add(LogType.EmergencyShuttle, LogImpact.High, $"Round ended, showing summary");
 
             //Tell every client the round has ended.
-            // SS220 Round End Titles begin 
+            // SS220 Round End Titles begin
             //var gamemodeTitle = CurrentPreset != null ? Loc.GetString(CurrentPreset.ModeTitle) : string.Empty;
             var gamemodeTitle = CurrentPreset != null ? CurrentPresetTitleOverride ?? Loc.GetString(CurrentPreset.ModeTitle) : string.Empty;
-            // SS220 Round End Titles end 
+            // SS220 Round End Titles end
 
             // Let things add text here.
             var textEv = new RoundEndTextAppendEvent();

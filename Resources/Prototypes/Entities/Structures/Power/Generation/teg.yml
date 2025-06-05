@@ -23,7 +23,7 @@
           shader: unshaded
           visible: false
           map: [ "enum.TegVisualLayers.PowerOutput" ]
-    - type: GenericVisualizer 
+    - type: GenericVisualizer
       visuals:
         enum.PowerDeviceVisuals.Powered:
           enum.PowerDeviceVisualLayers.Powered:

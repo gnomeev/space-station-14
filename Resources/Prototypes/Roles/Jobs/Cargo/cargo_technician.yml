@@ -4,7 +4,7 @@
   description: job-description-cargotech
   playTimeTracker: JobCargoTechnician
   requirements:
-    - !type:OverallPlaytimeRequirement 
+    - !type:OverallPlaytimeRequirement
       time: 3600 # SS220-RoleTime 2
   startingGear: CargoTechGear
   icon: "JobIconCargoTechnician"
