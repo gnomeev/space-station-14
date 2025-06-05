@@ -62,7 +62,6 @@
     startOnStick: true
     canToggleStartOnStick: true
   - type: TimerStartOnSignal
-  - type: TriggerOnSignal #ss220 c4-instant-detonation-back
   - type: DeviceLinkSink
     ports:
     - Timer

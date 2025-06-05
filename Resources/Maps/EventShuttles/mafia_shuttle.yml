@@ -671,44 +671,6 @@ entities:
     - type: Transform
       pos: 10.492183,-16.468414
       parent: 2
-- proto: ActionToggleLight
-  entities:
-  - uid: 1023
-    components:
-    - type: Transform
-      parent: 1022
-    - type: InstantAction
-      container: 1022
-  - uid: 1030
-    components:
-    - type: Transform
-      parent: 1029
-    - type: InstantAction
-      container: 1029
-  - uid: 1037
-    components:
-    - type: Transform
-      parent: 1036
-    - type: InstantAction
-      container: 1036
-  - uid: 1045
-    components:
-    - type: Transform
-      parent: 1044
-    - type: InstantAction
-      container: 1044
-  - uid: 1052
-    components:
-    - type: Transform
-      parent: 1051
-    - type: InstantAction
-      container: 1051
-  - uid: 1060
-    components:
-    - type: Transform
-      parent: 1059
-    - type: InstantAction
-      container: 1059
 - proto: AirAlarm
   entities:
   - uid: 444
@@ -6347,13 +6309,6 @@ entities:
           - 1032
           - 1033
           - 1034
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1030
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1030
     - type: Ringer
       ringtone:
       - D
@@ -6367,7 +6322,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: Forensics
       residues: []
       dnas: []
@@ -6407,13 +6361,6 @@ entities:
           - 1039
           - 1040
           - 1041
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1037
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1037
     - type: Ringer
       ringtone:
       - E
@@ -6427,7 +6374,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: Forensics
       residues: []
       dnas: []
@@ -6467,13 +6413,6 @@ entities:
           - 1047
           - 1048
           - 1049
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1045
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1045
     - type: Ringer
       ringtone:
       - C
@@ -6487,7 +6426,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: Forensics
       residues: []
       dnas: []
@@ -6527,13 +6465,6 @@ entities:
           - 1054
           - 1055
           - 1056
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1052
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1052
     - type: Ringer
       ringtone:
       - G
@@ -6547,7 +6478,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: Forensics
       residues: []
       dnas: []
@@ -6587,13 +6517,6 @@ entities:
           - 1062
           - 1063
           - 1064
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1060
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1060
     - type: Ringer
       ringtone:
       - E
@@ -6607,7 +6530,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: Forensics
       residues: []
       dnas: []
@@ -6702,8 +6624,6 @@ entities:
           - 1025
           - 1026
           - 1027
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1023
     - type: Ringer
       ringtone:
       - E
@@ -6717,7 +6637,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
 - proto: NewsReaderCartridge
   entities:
   - uid: 998
