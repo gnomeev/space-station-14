@@ -47,5 +47,6 @@
   equipment:
     head: ClothingHeadHatBeretSecurity
     mask: ClothingMaskGasSecurity
-    neck: Dinkystar
+    # neck: Dinkystar # SS220-more-robust-sec
+    neck: ClothingBeltHolster # SS220-more-robust-sec
     gloves: ClothingHandsGlovesColorBlack
