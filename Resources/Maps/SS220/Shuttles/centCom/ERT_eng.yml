@@ -532,14 +532,6 @@ entities:
     - type: InstantAction
       container: 12
       entIcon: 12
-- proto: ActionToggleInternals
-  entities:
-  - uid: 16
-    components:
-    - type: Transform
-      parent: 15
-    - type: InstantAction
-      container: 15
 - proto: AirAlarm
   entities:
   - uid: 19
@@ -2980,16 +2972,8 @@ entities:
     components:
     - type: Transform
       parent: 14
-    - type: GasTank
-      toggleActionEntity: 16
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 16
     - type: InsideEntityStorage
   - uid: 213
     components:

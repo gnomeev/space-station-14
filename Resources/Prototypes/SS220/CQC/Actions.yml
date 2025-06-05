@@ -7,6 +7,7 @@
     icon: SS220/Interface/Actions/CQCCombat/blowback.png
     useDelay: 7
     priority: -10
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:CQCBlowbackEvent
 
@@ -19,6 +20,7 @@
     icon: SS220/Interface/Actions/CQCCombat/punch.png
     useDelay: 2
     priority: -10
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:CQCPunchEvent
 
@@ -32,6 +34,7 @@
     useDelay: 4
     checkCanInteract: false
     priority: -10
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:CQCDisarmEvent
 

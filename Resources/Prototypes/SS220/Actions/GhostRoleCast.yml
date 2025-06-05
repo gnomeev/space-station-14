@@ -22,7 +22,6 @@
     useDelay: 1
     clientExclusive: true
     checkCanInteract: false
-
     priority: -8
   - type: TargetAction
     deselectOnMiss: false

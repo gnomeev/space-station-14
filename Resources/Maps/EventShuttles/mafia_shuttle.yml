@@ -673,36 +673,6 @@ entities:
       parent: 2
 - proto: ActionToggleLight
   entities:
-  - uid: 939
-    components:
-    - type: Transform
-      parent: 938
-    - type: InstantAction
-      container: 938
-  - uid: 995
-    components:
-    - type: Transform
-      parent: 994
-    - type: InstantAction
-      container: 994
-  - uid: 1002
-    components:
-    - type: Transform
-      parent: 1001
-    - type: InstantAction
-      container: 1001
-  - uid: 1009
-    components:
-    - type: Transform
-      parent: 1008
-    - type: InstantAction
-      container: 1008
-  - uid: 1016
-    components:
-    - type: Transform
-      parent: 1015
-    - type: InstantAction
-      container: 1015
   - uid: 1023
     components:
     - type: Transform
@@ -930,13 +900,6 @@ entities:
           - 1011
           - 1012
           - 1013
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1009
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1009
     - type: Ringer
       ringtone:
       - G
@@ -950,7 +913,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
 - proto: BaseBallBat
   entities:
   - uid: 318
@@ -1042,13 +1004,6 @@ entities:
           - 997
           - 998
           - 999
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 995
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 995
     - type: Ringer
       ringtone:
       - A
@@ -1062,7 +1017,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
 - proto: BoxLethalshot
   entities:
   - uid: 446
@@ -5799,22 +5753,14 @@ entities:
     - type: Transform
       pos: 4.4371104,-8.251892
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 939
     - type: ContainerContainer
       containers:
         cell_slot: !type:ContainerSlot
           showEnts: False
           occludes: True
           ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 939
     - type: Physics
       canCollide: True
-    - type: ActionsContainer
 - proto: LightPostSmall
   entities:
   - uid: 572
@@ -6349,13 +6295,6 @@ entities:
           - 1018
           - 1019
           - 1020
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1016
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1016
     - type: Ringer
       ringtone:
       - A
@@ -6369,7 +6308,6 @@ entities:
       receiveFrequency: 2202
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
     - type: Forensics
       residues: []
       dnas: []
@@ -6711,13 +6649,6 @@ entities:
           - 1004
           - 1005
           - 1006
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1002
-    - type: UnpoweredFlashlight
-      toggleActionEntity: 1002
     - type: Ringer
       ringtone:
       - D
@@ -6771,11 +6702,6 @@ entities:
           - 1025
           - 1026
           - 1027
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 1023
     - type: UnpoweredFlashlight
       toggleActionEntity: 1023
     - type: Ringer

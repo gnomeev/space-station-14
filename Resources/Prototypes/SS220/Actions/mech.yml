@@ -25,5 +25,6 @@
     useDelay: 1
     checkCanInteract: false
     priority: -10
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:MechClothingGrabEvent

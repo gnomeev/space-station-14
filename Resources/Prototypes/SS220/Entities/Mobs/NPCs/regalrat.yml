@@ -24,5 +24,6 @@
     icon:
       sprite: SS220/Interface/Actions/actions_rat_king.rsi
       state: ratKingRummage
+  - type: TargetAction
   - type: EntityTargetAction
     event: !type:RatKingRummageActionEvent
