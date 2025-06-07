@@ -792,8 +792,6 @@ entities:
     - type: Transform
       pos: 6.4525533,-10.1639
       parent: 1
-    - type: SelectableBorgModule
-      moduleSwapActionEntity: 5
     - type: ContainerContainer
       containers:
         provided_container: !type:Container

@@ -739,7 +739,7 @@ ClothingHeadHelmetHardsuitBasic: null
 SuitStorageBasic: SuitStorageEVA
 
 # 2025-05-18
-ClothingNeckCloakMiner: null
+ClothingNeckCloakMiner: ClothingNeckCloakSalvagerSupreme # SS220-migrate-cloak
 
 # 2025-05-22
 MatterBinStockPart: MicroManipulatorStockPart
