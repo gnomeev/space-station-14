@@ -253,6 +253,11 @@ public sealed class TegSystem : EntitySystem
         if (!Resolve(uid, ref component))
             return;
 
+        // SS220-fix-bagel-test-failing-cause-of-teg-center-begin
+        if (MetaData(uid).EntityLifeStage < EntityLifeStage.MapInitialized)
+            return;
+        // SS220-fix-bagel-test-failing-cause-of-teg-center-end
+
         var powerReceiver = Comp<ApcPowerReceiverComponent>(uid);
 
         _receiver.SetPowerDisabled(uid, !group.IsFullyBuilt, powerReceiver);
