@@ -89,3 +89,7 @@ public sealed partial class TraitorRuleComponent : Component
     [DataField]
     public FixedPoint2 StartingBalance = 20;
 }
+
+public sealed class TraitorRuleAddedEvent() : EntityEventArgs
+{
+}

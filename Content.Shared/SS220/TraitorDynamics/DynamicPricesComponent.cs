@@ -6,12 +6,5 @@ namespace Content.Shared.SS220.TraitorDynamics;
 public sealed partial class DynamicPricesComponent : Component
 {
     [DataField]
-    public byte CurrentDynamicState;
-
-    public enum DynamicState : byte
-    {
-        Light,
-        Medium,
-        Hard,
-    }
+    public DynamicPrototype CurrentDynamic;
 }

@@ -1,0 +1,6 @@
+- type: weightedRandom
+  id: WeightedDynamicsList
+  weights:
+    Normal: 0.5
+    Light: 0.25
+    Hard: 0.25
