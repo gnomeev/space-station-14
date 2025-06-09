@@ -9,20 +9,35 @@ public sealed class TemporalStealthSystem : EntitySystem
 {
     [Dependency] private readonly StealthSystem _stealth = default!;
     [Dependency] private readonly IGameTiming _gameTiming = default!;
-    [Dependency] private readonly StatusEffectsSystem _status = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<TemporalStealthComponent, ComponentInit>(OnCompInit);
+        SubscribeLocalEvent<TemporalStealthComponent, ComponentShutdown>(OnCompShutdown);
+    }
+
+    private void OnCompShutdown(Entity<TemporalStealthComponent> ent, ref ComponentShutdown args)
+    {
+        if (!ent.Comp.HasComp)
+        {
+            RemCompDeferred<StealthComponent>(ent);
+            return;
+        }
+
+        _stealth.SetEnabled(ent, false);
     }
 
     private void OnCompInit(Entity<TemporalStealthComponent> ent, ref ComponentInit args)
     {
         ent.Comp.LastStealthTime = _gameTiming.CurTime + ent.Comp.StealthTime;
+        ent.Comp.HasComp = HasComp<StealthComponent>(ent);
 
-        if (HasComp<StealthComponent>(ent))
-            ent.Comp.HasComp = true;
+        if (!ent.Comp.HasComp)
+            EnsureComp<StealthComponent>(ent);
+
+        _stealth.SetEnabled(ent, true);
+        _stealth.SetVisibility(ent, ent.Comp.Visibility);
     }
 
     public override void Update(float frameTime)
@@ -30,26 +45,12 @@ public sealed class TemporalStealthSystem : EntitySystem
         base.Update(frameTime);
 
         var query = EntityQueryEnumerator<TemporalStealthComponent>();
+        var time = _gameTiming.CurTime;
 
         while (query.MoveNext(out var ent, out var temporal))
         {
-            if (temporal.LastStealthTime > _gameTiming.CurTime)
-            {
-
-            }
-
-            _stealth.SetEnabled(ent, false);
-
-            if (!temporal.HasComp)
-                RemCompDeferred<StealthComponent>(ent);
-
-            RemCompDeferred<TemporalStealthComponent>(ent);
+            if (temporal.LastStealthTime < time)
+                RemCompDeferred<TemporalStealthComponent>(ent);
         }
-    }
-
-    public void SetTemporalStealth(EntityUid target, TemporalStealthComponent? comp = null)
-    {
-        if(!Resolve(target, ref comp, logMissing: true))
-            return;
     }
 }
