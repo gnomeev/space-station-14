@@ -7,9 +7,12 @@ namespace Content.Shared.SS220.TraitorDynamics;
 [Prototype]
 public sealed partial class DynamicPrototype : IPrototype
 {
-    [DataField]
+    [IdDataField]
     public string ID { get; private set; } = default!;
 
     [DataField]
     public float DynamicPriceMultiplier = 2.0f;
+
+    [DataField]
+    public int LimitAntag;
 }

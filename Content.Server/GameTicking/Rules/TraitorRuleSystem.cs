@@ -53,8 +53,6 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     {
         base.Added(uid, component, gameRule, args);
         SetCodewords(component, args.RuleEntity);
-        var ev = new TraitorRuleAddedEvent(); // ts must be reworked
-        RaiseLocalEvent(uid, ev);
     }
 
     private void AfterEntitySelected(Entity<TraitorRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
