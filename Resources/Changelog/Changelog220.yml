@@ -1,12 +1,4 @@
 ﻿Entries:
-- author: UrPrice
-  changes:
-  - message: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u044B \u0438\u0433\u0440\
-      \u043E\u0432\u044B\u0435 \u043A\u0430\u0440\u0442\u044B!"
-    type: Tweak
-  id: 537
-  time: '2024-09-29T10:51:22.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/1956
 - author: VictorBoum, UrPrice, AliceValestray, NightmareStalker, RtmFool, Heidem,
     Nozychek_, evgen_killred, vatzob
   changes:
@@ -6833,3 +6825,13 @@
   id: 1036
   time: '2025-06-11T07:29:03.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/3036
+- author: R-R0S, TheDarkBread
+  changes:
+  - message: "\u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D \u0443\u0440\u043E\
+      \u043D \u043F\u043E \u0441\u0442\u0430\u043C\u0438\u043D\u0435 \u0443 \u0431\
+      \u043B\u0430\u0441\u0442\u0435\u0440\u043D\u044B\u0445 \u0441\u043D\u0430\u0440\
+      \u044F\u0434\u043E\u0432(KRS)"
+    type: Fix
+  id: 1037
+  time: '2025-06-11T07:30:32.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/3017
