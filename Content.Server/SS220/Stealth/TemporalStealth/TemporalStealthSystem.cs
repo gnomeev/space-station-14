@@ -1,6 +1,5 @@
 using Content.Server.Stealth;
 using Content.Shared.SS220.Stealth.TemporalStealth;
-using Content.Shared.StatusEffect;
 using Content.Shared.Stealth.Components;
 using Robust.Shared.Timing;
 namespace Content.Server.SS220.Stealth.TemporalStealth;
@@ -13,7 +12,7 @@ public sealed class TemporalStealthSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TemporalStealthComponent, ComponentInit>(OnCompInit);
+        SubscribeLocalEvent<TemporalStealthComponent, ComponentStartup>(OnCompStartup);
         SubscribeLocalEvent<TemporalStealthComponent, ComponentShutdown>(OnCompShutdown);
     }
 
@@ -28,7 +27,7 @@ public sealed class TemporalStealthSystem : EntitySystem
         _stealth.SetEnabled(ent, false);
     }
 
-    private void OnCompInit(Entity<TemporalStealthComponent> ent, ref ComponentInit args)
+    private void OnCompStartup(Entity<TemporalStealthComponent> ent, ref ComponentStartup args)
     {
         ent.Comp.LastStealthTime = _gameTiming.CurTime + ent.Comp.StealthTime;
         ent.Comp.HasComp = HasComp<StealthComponent>(ent);
@@ -52,5 +51,15 @@ public sealed class TemporalStealthSystem : EntitySystem
             if (temporal.LastStealthTime < time)
                 RemCompDeferred<TemporalStealthComponent>(ent);
         }
+    }
+
+    public void ActivateTemporalStealth(EntityUid uid, float visibility, TimeSpan duration)
+    {
+        var temporal = EnsureComp<TemporalStealthComponent>(uid);
+        temporal.Visibility = visibility;
+        temporal.StealthTime = duration;
+        temporal.LastStealthTime = _gameTiming.CurTime + duration;
+
+        Dirty(uid, temporal);
     }
 }
