@@ -9,7 +9,7 @@ namespace Content.Shared.SS220.TraitorDynamics;
 /// <summary>
 /// This handles...
 /// </summary>
-public sealed class SharedTraitorDynamicsSystem : EntitySystem
+public abstract class SharedTraitorDynamicsSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -29,7 +29,7 @@ public sealed class SharedTraitorDynamicsSystem : EntitySystem
         if (args.RuleId!= GameRule)
             return;
 
-        var ev = new TraitorRuleAddedEvent();
+        var ev = new TraitorRuleAddedEvent(args.RuleEntity);
         RaiseLocalEvent(ev);
     }
 
@@ -38,7 +38,17 @@ public sealed class SharedTraitorDynamicsSystem : EntitySystem
         var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
         return validWeight.Pick(_random);
     }
-}
-public sealed class TraitorRuleAddedEvent() : EntityEventArgs
-{
+
+    public void SetDynamic(EntityUid ent, string proto, TraitorDynamicsComponent? comp = null)
+    {
+        if (!Resolve(ent, ref comp))
+            return;
+
+        if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto))
+            return;
+
+        comp.CurrentDynamic = dynamicProto.ID;
+        var ev = new DynamicAddedEvent(ent, dynamicProto.ID);
+        RaiseLocalEvent(ent, ev);
+    }
 }

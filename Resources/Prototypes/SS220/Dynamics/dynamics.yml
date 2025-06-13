@@ -1,0 +1,14 @@
+- type: dynamic
+  id: LightDynamic
+  dynamicPriceMultiplier: 1.4
+  antagLimit: 8
+
+- type: dynamic
+  id: MediumDynamic
+  dynamicPriceMultiplier: 1.8
+  antagLimit: 6
+
+- type: dynamic
+  id: HardDynamic
+  dynamicPriceMultiplier: 2
+  antagLimit: 5
