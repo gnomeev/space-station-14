@@ -67,7 +67,7 @@ public partial class ListingData : IEquatable<ListingData>
         TimeSpan restockTime,
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> dataDiscountDownTo,
         bool disableRefund,
-        Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices) // SS220
+        Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices) // SS220 TraitorDynamics
     {
         Name = name;
         DiscountCategory = discountCategory;
@@ -88,7 +88,8 @@ public partial class ListingData : IEquatable<ListingData>
         RestockTime = restockTime;
         DiscountDownTo = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(dataDiscountDownTo);
         DisableRefund = disableRefund;
-        DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220
+        DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>,
+            Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220 TraitorDynamics
     }
 
     [ViewVariables]
@@ -199,10 +200,10 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> DiscountDownTo = new();
 
-    // SS220 Dynamics
+    // SS220 TraitorDynamics
     [DataField]
     public Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> DynamicsPrices = new();
-    // SS220 Dynamics
+    // SS220 TraitorDynamics
 
     /// <summary>
     /// Whether or not to disable refunding for the store when the listing is purchased from it.
@@ -305,7 +306,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.RestockTime,
             listingData.DiscountDownTo,
             listingData.DisableRefund,
-            listingData.DynamicsPrices
+            listingData.DynamicsPrices // SS220 TraitorDynamics
         )
     {
     }
