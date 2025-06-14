@@ -1,12 +1,12 @@
 using Robust.Shared.Prototypes;
 
-namespace Content.Shared.SS220.TraitorDynamics;
+namespace Content.Shared.SS220.TraitorDynamics.Components;
 
 [RegisterComponent]
 public sealed partial class TraitorDynamicsComponent :Component
 {
     [DataField]
-    public ProtoId<DynamicPrototype> CurrentDynamic;
+    public ProtoId<DynamicPrototype>? CurrentDynamic;
 }
 
 

@@ -3,6 +3,7 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared.SS220.TraitorDynamics.Components;
 
 namespace Content.Shared.SS220.TraitorDynamics;
 

@@ -1,9 +1,12 @@
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.GameTicking.Rules.Components;
+using Content.Server.StoreDiscount.Systems;
+using Content.Shared.FixedPoint;
 using Content.Shared.SS220.TraitorDynamics;
+using Content.Shared.SS220.TraitorDynamics.Components;
+using Content.Shared.Store;
 using Robust.Shared.Prototypes;
 
 namespace Content.Server.SS220.TraitorDynamics;
@@ -22,6 +25,26 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         SubscribeLocalEvent<TraitorRuleAddedEvent>(OnTraitorRuleAdded);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
+        SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInit);
+    }
+
+    private void OnStoreInit(StoreInitializedEvent ev)
+    {
+        var query = EntityQueryEnumerator<TraitorDynamicsComponent>();
+
+        while (query.MoveNext(out var comp))
+        {
+            if (comp.CurrentDynamic == null)
+                continue;
+
+            foreach (var listing in ev.Listings)
+            {
+                if (!listing.DynamicsPrices.TryGetValue(comp.CurrentDynamic.Value, out var price))
+                    return;
+
+                listing.AddCostModifier(comp.CurrentDynamic, price);
+            }
+        }
     }
 
     private void OnDynamicAdded(DynamicAddedEvent ev)

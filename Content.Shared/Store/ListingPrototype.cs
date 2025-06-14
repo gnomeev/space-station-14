@@ -1,5 +1,6 @@
 using System.Linq;
 using Content.Shared.FixedPoint;
+using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.Store.Components;
 using Content.Shared.StoreDiscount.Components;
 using Robust.Shared.Prototypes;
@@ -40,8 +41,8 @@ public partial class ListingData : IEquatable<ListingData>
         other.OriginalCost,
         other.RestockTime,
         other.DiscountDownTo,
-        other.DisableRefund
-    )
+        other.DisableRefund,
+        other.DynamicsPrices) // SS220
     {
 
     }
@@ -65,8 +66,8 @@ public partial class ListingData : IEquatable<ListingData>
         IReadOnlyDictionary<ProtoId<CurrencyPrototype>, FixedPoint2> originalCost,
         TimeSpan restockTime,
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> dataDiscountDownTo,
-        bool disableRefund
-    )
+        bool disableRefund,
+        Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> dynamicsPrices) // SS220
     {
         Name = name;
         DiscountCategory = discountCategory;
@@ -87,6 +88,7 @@ public partial class ListingData : IEquatable<ListingData>
         RestockTime = restockTime;
         DiscountDownTo = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(dataDiscountDownTo);
         DisableRefund = disableRefund;
+        DynamicsPrices = new Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>(dynamicsPrices); // SS220
     }
 
     [ViewVariables]
@@ -197,6 +199,11 @@ public partial class ListingData : IEquatable<ListingData>
     [DataField]
     public Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> DiscountDownTo = new();
 
+    // SS220 Dynamics
+    [DataField]
+    public Dictionary<ProtoId<DynamicPrototype>, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> DynamicsPrices = new();
+    // SS220 Dynamics
+
     /// <summary>
     /// Whether or not to disable refunding for the store when the listing is purchased from it.
     /// </summary>
@@ -297,7 +304,8 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
             listingData.OriginalCost,
             listingData.RestockTime,
             listingData.DiscountDownTo,
-            listingData.DisableRefund
+            listingData.DisableRefund,
+            listingData.DynamicsPrices
         )
     {
     }
