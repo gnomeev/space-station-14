@@ -34,7 +34,6 @@
   components:
   - type: StorageFill
     contents:
-      - id: CrowbarRed
       - id: VariantCubeBox
       - id: BoxMousetrap
         amount: 2
@@ -80,6 +79,8 @@
         amount: 2
       - id: Plunger
         amount: 2
+      - id: BearTrap #SS220 TrapSystem
+        amount: 2 #SS220 TrapSystem
 
 - type: entity
   id: ClosetLegalFilled
@@ -102,7 +103,7 @@
       - id: ClothingHandsGlovesLeather
       - id: ClothingOuterApronBotanist
       - id: ClothingHeadBandBotany
-      - id: RobustHarvestChemistryBottle
+      - id: ChemistryBottleRobustHarvest
         prob: 0.3
       - id: ClothingBeltPlant
       - id: PlantBag ##Some maps don't have nutrivend
@@ -134,6 +135,7 @@
   id: ClosetJanitorBombFilled
   parent: ClosetJanitorBomb
   suffix: DO NOT MAP, Filled
+  categories: [ DoNotMap ]
   components:
   - type: StorageFill
     contents:

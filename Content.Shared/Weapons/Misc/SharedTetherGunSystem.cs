@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Anomaly.Components;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Hands.Components;
 using Content.Shared.Interaction;
@@ -175,6 +176,11 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
         if (HasComp<TetheredComponent>(target) || !TryComp<PhysicsComponent>(target, out var physics))
             return false;
 
+        // SS220 Anomaly fix and tether gravy gun used remove
+        if (HasComp<AnomalyComponent>(target))
+            return false;
+        // SS220 Anomaly fix and tether gravy gun used remove
+
         if (physics.BodyType == BodyType.Static && !component.CanUnanchor ||
             _container.IsEntityInContainer(target))
             return false;
@@ -204,7 +210,7 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
 
         TryComp<AppearanceComponent>(gunUid, out var appearance);
         _appearance.SetData(gunUid, TetherVisualsStatus.Key, true, appearance);
-        _appearance.SetData(gunUid, ToggleableLightVisuals.Enabled, true, appearance);
+        _appearance.SetData(gunUid, ToggleableVisuals.Enabled, true, appearance);
 
         // Target updates
         TransformSystem.Unanchor(target, targetXform);
@@ -280,7 +286,7 @@ public abstract partial class SharedTetherGunSystem : EntitySystem
 
         TryComp<AppearanceComponent>(gunUid, out var appearance);
         _appearance.SetData(gunUid, TetherVisualsStatus.Key, false, appearance);
-        _appearance.SetData(gunUid, ToggleableLightVisuals.Enabled, false, appearance);
+        _appearance.SetData(gunUid, ToggleableVisuals.Enabled, false, appearance);
 
         RemComp<TetheredComponent>(component.Tethered.Value);
         _blocker.UpdateCanMove(component.Tethered.Value);

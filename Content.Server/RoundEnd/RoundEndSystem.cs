@@ -4,8 +4,6 @@ using Content.Server.AlertLevel;
 using Content.Shared.CCVar;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
-using Content.Server.DeviceNetwork;
-using Content.Server.DeviceNetwork.Components;
 using Content.Server.DeviceNetwork.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Screens.Components;
@@ -21,6 +19,7 @@ using Robust.Shared.Configuration;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.DeviceNetwork.Components;
 using Timer = Robust.Shared.Timing.Timer;
 using Content.Server.SS220.GameTicking.Rules;
 using Robust.Shared.Audio;
@@ -244,7 +243,7 @@ namespace Content.Server.RoundEnd
             }
 
             _chatSystem.DispatchGlobalAnnouncement(Loc.GetString("round-end-system-shuttle-recalled-announcement"),
-                Loc.GetString("Station"), false, colorOverride: Color.Gold);
+                Loc.GetString("round-end-system-shuttle-sender-announcement"), false, colorOverride: Color.Gold);
 
             _audio.PlayGlobal("/Audio/Announcements/shuttlerecalled.ogg", Filter.Broadcast(), true, AudioParams.Default.AddVolume(-4)); // Corvax-Announcements: Decrease volume
 

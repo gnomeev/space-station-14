@@ -51,12 +51,14 @@
   name: chemical-implant-action-name
   description: chemical-implant-action-desc
   components:
-  - type: InstantAction
-    charges: 1
+  - type: LimitedCharges
+    maxCharges: 1
+  - type: Action
     checkCanInteract: false
     itemIconStyle: BigAction
     priority: -20
     icon:
       sprite: SS220/Objects/ChemicalImplants/implanters.rsi
       state: icon_empty
+  - type: InstantAction
     event: !type:UseChemicalImplantEvent

@@ -22,6 +22,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -40,6 +41,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - WhitelistChameleon
 
 - type: entity
@@ -56,6 +58,7 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -103,6 +106,7 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -120,6 +124,7 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
   #ss220 special_sounds start
@@ -144,6 +149,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -161,6 +167,7 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -213,6 +220,22 @@
 
 - type: entity
   parent: ClothingHeadBase
+  id: ClothingHeadHatBeretCommand
+  name: command beret
+  description: A beret with a Command insignia emblazoned on it. It has an aura of authority.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/beret_command.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/beret_command.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - HamsterWearable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
   id: ClothingHeadHatBowlerHat
   name: bowler hat
   description: Stylish bowler hat.
@@ -236,6 +259,7 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -296,6 +320,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -312,6 +337,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -351,6 +377,7 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
   #ss220 special_sounds start
@@ -374,6 +401,7 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -435,11 +463,12 @@
     tags:
     - WhitelistChameleon
     - ClothMade
+    - Recyclable
   - type: HideLayerClothing
-    slots:
-    - Hair
-    - HeadTop
-    - HeadSide
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadHatWizardBase
@@ -453,13 +482,11 @@
     sprite: Clothing/Head/Hats/redwizard.rsi
 
 - type: entity
-  parent: ClothingHeadBase
+  parent: [ClothingHeadBase, BaseFoldable]
   id: ClothingHeadHatSantahat
   name: santa hat
-  description: A festive hat worn by Santa Claus.
+  description: A festive hat worn by Santa Claus. Now with a foldable beard.
   components:
-  - type: Sprite
-    sprite: Clothing/Head/Hats/santahat.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/santahat.rsi
   #ss220 special_sounds start
@@ -468,6 +495,27 @@
     sounds:
       Male: MaleSanta
   #ss220 special_sounds end
+  - type: Appearance
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
+    slots: []
+  - type: Foldable
+    canFoldInsideContainer: true
+  - type: FoldableClothing
+    foldedEquippedPrefix: nobeard
+    foldedHeldPrefix: nobeard
+  - type: Sprite
+    sprite: Clothing/Head/Hats/santahat.rsi
+    layers:
+    - state: icon
+      map: ["unfoldedLayer"]
+    - state: icon-nobeard
+      map: [ "foldedLayer" ]
+      visible: true
+
 
 
 - type: entity
@@ -498,8 +546,14 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -512,12 +566,18 @@
     sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/surgcap_green.rsi
+  #SS220-surgery-resprite end
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
-    #SS220-surgery-resprite end
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -530,12 +590,17 @@
     sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi
   - type: Clothing
     sprite: SS220/Clothing/Head/Hats/surgcap_purple.rsi
+  #SS220-surgery-resprite end
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
   - type: Tag
     tags:
     - ClothMade
     - HamsterWearable
     - WhitelistChameleon
-    #SS220-surgery-resprite end
 
 - type: entity
   parent: ClothingHeadBase
@@ -550,6 +615,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -581,6 +647,43 @@
       map: ["foldedLayer"]
       visible: false
 
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatCanadaBeanie
+  name: beanie
+  description: Red, white and snug. It radiates a homely feeling, if your home happens to be chilly and filled with coffeehouses.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/beanie.rsi
+    layers:
+    - state: body-icon
+    - state: cuffcrown-icon
+      color: "#a60b0b"
+    - state: pompom-icon
+      color: "#a60b0b"
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: body-inhand-left
+      - state: cuffcrown-inhand-left
+        color: "#a60b0b"
+      - state: pompom-inhand-left
+        color: "#a60b0b"
+      right:
+      - state: body-inhand-right
+      - state: cuffcrown-inhand-right
+        color: "#a60b0b"
+      - state: pompom-inhand-right
+        color: "#a60b0b"
+  - type: Clothing
+    sprite: Clothing/Head/Hats/beanie.rsi
+    clothingVisuals:
+      head:
+      - state: body-equipped-HELMET
+      - state: cuffcrown-equipped-HELMET
+        color: "#a60b0b"
+      - state: pompom-equipped-HELMET
+        color: "#a60b0b"
 
 - type: entity
   parent: ClothingHeadHatWizardBase
@@ -621,6 +724,7 @@
     tags:
     - WhitelistChameleon
     - ClothMade
+    - Recyclable
   - type: HideLayerClothing
     slots:
     - Hair
@@ -635,10 +739,15 @@
     sprite: Clothing/Head/Hats/wizard_fake.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/wizard_fake.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   abstract: true
-  parent: ClothingHeadBase
+  parent: [ ClothingHeadBase, BaseMagicalContraband ]
   id: ClothingHeadHatWizardBase
   components:
   - type: WizardClothes
@@ -656,6 +765,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -691,6 +801,11 @@
     sprite: Clothing/Head/Hats/pyjamasyndicateblack.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/pyjamasyndicateblack.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: [ ClothingHeadBase]
@@ -702,6 +817,11 @@
     sprite: Clothing/Head/Hats/pyjamasyndicatepink.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/pyjamasyndicatepink.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: [ ClothingHeadBase]
@@ -713,6 +833,11 @@
     sprite: Clothing/Head/Hats/pyjamasyndicatered.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/pyjamasyndicatered.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -725,6 +850,11 @@
   - type: Clothing
     sprite: Clothing/Head/Hats/papersack.rsi
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -737,6 +867,11 @@
   - type: Clothing
     sprite: Clothing/Head/Hats/papersacksmile.rsi
   - type: IdentityBlocker
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -751,6 +886,17 @@
 
 - type: entity
   parent: ClothingHeadBase
+  id: ClothingHeadWehcellentCap
+  name: wehcellent cap
+  description: It was a net hat! Tiders wear them all the time! It's got airholes in the back to keep a cross-breeze going and everything!
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/wehcellentcap.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/wehcellentcap.rsi
+
+- type: entity
+  parent: ClothingHeadBase
   id: ClothingHeadNurseHat
   name: nurse hat
   description: Somehow I feel I'm not supposed to leave this place.
@@ -762,6 +908,7 @@
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
 
@@ -775,6 +922,11 @@
     sprite: Clothing/Head/Hats/rasta.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/rasta.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -806,6 +958,11 @@
       sprite: Clothing/Head/Hats/jester2.rsi
     - type: Clothing
       sprite: Clothing/Head/Hats/jester2.rsi
+    - type: HideLayerClothing
+      layers:
+        Hair: HEAD
+        HeadTop : HEAD
+        HeadSide : HEAD
 
 - type: entity
   parent: [ClothingHeadBase]
@@ -821,6 +978,7 @@
     tags:
     - ClothMade
     - Ian # SS220 Shapochki
+    - Recyclable
     - HamsterWearable
     - WhitelistChameleon
   #ss220 special_sounds start
@@ -979,9 +1137,12 @@
     sprite: Clothing/Head/Hats/capcap.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/capcap.rsi
+  - type: Item
+    sprite: Clothing/Head/Hats/capcap.rsi
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - WhitelistChameleon
     - Ian # SS220 Shapochki
     - HamsterWearable
@@ -1001,9 +1162,12 @@
     sprite: Clothing/Head/Hats/comcap.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/comcap.rsi
+  - type: Item
+    sprite: Clothing/Head/Hats/comcap.rsi
   - type: Tag
     tags:
     - ClothMade
+    - Recyclable
     - WhitelistChameleon
     - Ian # SS220 Shapochki
     - HamsterWearable
@@ -1018,6 +1182,11 @@
     sprite: Clothing/Head/Hats/gladiator.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/gladiator.rsi
+  - type: HideLayerClothing
+    layers:
+      Hair: HEAD
+      HeadTop : HEAD
+      HeadSide : HEAD
 
 - type: entity
   parent: ClothingHeadBase
@@ -1221,3 +1390,14 @@
     sprite: Clothing/Head/Hats/beret_medic.rsi
   - type: Clothing
     sprite: Clothing/Head/Hats/beret_medic.rsi
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatSolidHeadband
+  name: solid headband
+  description: "You'll feel like you're Invisible while wearing this! (DISCLAIMER: DOES NOT ACTUALLY MAKE THE WEARER INVISIBLE)"
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/solidheadband.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/solidheadband.rsi
