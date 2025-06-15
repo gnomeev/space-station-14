@@ -1,5 +1,7 @@
+using Content.Shared.Cargo.Prototypes;
 using Content.Shared.SS220.MineralTrade.Protos;
 using Robust.Shared.GameStates;
+using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.MineralTrade;
@@ -15,6 +17,9 @@ public sealed partial class MineralTradeComponent : Component
     /// </summary>
     [DataField]
     public bool ShouldThrow = false;
+
+    [DataField]
+    public ProtoId<CargoAccountPrototype> Account;
 
     public Dictionary<MineralListingPrototype, int> Checkout = new();
 

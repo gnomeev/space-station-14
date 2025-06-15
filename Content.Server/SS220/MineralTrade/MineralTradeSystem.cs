@@ -1,8 +1,9 @@
 using System.Linq;
-using Content.Server.Cargo.Components;
 using Content.Server.Cargo.Systems;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
+using Content.Shared.Cargo.Components;
+using Content.Shared.Cargo.Prototypes;
 using Content.Shared.SS220.MineralTrade;
 using Content.Shared.SS220.MineralTrade.Events;
 using Content.Shared.SS220.MineralTrade.Protos;
@@ -58,7 +59,7 @@ public sealed partial class MineralTradeSystem : EntitySystem
             }
         }
 
-        _cargo.UpdateBankAccount(station.Value, bank, finalPrice);
+        _cargo.UpdateBankAccount((station.Value,bank), finalPrice, ent.Comp.Account);
         ent.Comp.Balance -= finalPrice;
         UpdateState(ent, ent.Comp);
     }
@@ -105,9 +106,13 @@ public sealed partial class MineralTradeSystem : EntitySystem
     {
        var station = _station.GetOwningStation(ent);
 
-       if (TryComp<StationBankAccountComponent>(station, out var bank))
+       if (!TryComp<StationBankAccountComponent>(station, out var bank))
+            return;
+
+       foreach (var (account, value) in bank.Accounts)
        {
-           ent.Comp.Balance = bank.Balance;
+           if (account.Id == ent.Comp.Account.Id)
+               ent.Comp.Balance = value;
        }
     }
 }
