@@ -17,7 +17,8 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 
     [ValidatePrototypeId<WeightedRandomPrototype>]
     private const string WeightsProto = "WeightedDynamicsList";
-    private const string GameRule = "Traitor";
+    private const string GameRuleTraitor = "Traitor";
+    private const string GameRuleSleeper = "SleeperAgents";
 
     public override void Initialize()
     {
@@ -27,11 +28,19 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 
     private void OnRuleAdded(ref GameRuleAddedEvent args)
     {
-        if (args.RuleId!= GameRule)
-            return;
+        switch (args.RuleId)
+        {
+            case GameRuleTraitor:
+                var evTraitor = new TraitorRuleAddedEvent(args.RuleEntity);
+                RaiseLocalEvent(evTraitor);
+                break;
 
-        var ev = new TraitorRuleAddedEvent(args.RuleEntity);
-        RaiseLocalEvent(ev);
+            case GameRuleSleeper:
+                var evSleeper = new TraitorSleeperAddedEvent(args.RuleEntity);
+                RaiseLocalEvent(evSleeper);
+                break;
+        }
+
     }
 
     public string GetRandomDynamic()
@@ -50,6 +59,21 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 
         comp.CurrentDynamic = dynamicProto.ID;
         var ev = new DynamicAddedEvent(ent, dynamicProto.ID);
-        RaiseLocalEvent(ent, ev);
+        RaiseLocalEvent(ev);
+    }
+
+    /// <summary>
+    /// Tries to find the type of dynamic while in Traitor game rule
+    /// </summary>
+    /// <returns>installed dynamic</returns>
+    public ProtoId<DynamicPrototype>? GetCurrentDynamic()
+    {
+        var query = EntityQueryEnumerator<TraitorDynamicsComponent>();
+
+        while (query.MoveNext(out var comp))
+        {
+            return comp.CurrentDynamic;
+        }
+        return default;
     }
 }

@@ -9,7 +9,15 @@ public sealed partial class TraitorDynamicsComponent :Component
     public ProtoId<DynamicPrototype>? CurrentDynamic;
 }
 
+public sealed class TraitorSleeperAddedEvent : EntityEventArgs
+{
+    public EntityUid RuleEnt;
 
+    public TraitorSleeperAddedEvent(EntityUid ruleEnt)
+    {
+        RuleEnt = ruleEnt;
+    }
+}
 public sealed class TraitorRuleAddedEvent : EntityEventArgs
 {
     public EntityUid RuleEnt;

@@ -15,4 +15,13 @@ public sealed partial class DynamicPrototype : IPrototype
 
     [DataField]
     public int LimitAntag;
+
+    [DataField]
+    public int LimitSleeperAntag;
+
+    [DataField]
+    public LocId LoreNameDynamic;
+
+    [DataField]
+    public LocId EndRoundNameDynamic;
 }

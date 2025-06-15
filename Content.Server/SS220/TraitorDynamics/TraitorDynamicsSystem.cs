@@ -25,10 +25,11 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         SubscribeLocalEvent<TraitorRuleAddedEvent>(OnTraitorRuleAdded);
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
+        SubscribeLocalEvent<TraitorSleeperAddedEvent>(OnTraitorSleeperAdded);
         SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInit);
     }
 
-    private void OnStoreInit(StoreInitializedEvent ev)
+    private void OnStoreInit(ref StoreInitializedEvent ev)
     {
         var query = EntityQueryEnumerator<TraitorDynamicsComponent>();
 
@@ -56,19 +57,32 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         _antag.SetMaxAntags(selectionComp, dynamic.LimitAntag);
     }
 
+    private void OnTraitorSleeperAdded(TraitorSleeperAddedEvent ev)
+    {
+        var dynamic = GetCurrentDynamic();
+
+        if (!_prototype.TryIndex(dynamic, out var dynamicProto))
+            return;
+
+        if (!TryComp<AntagSelectionComponent>(ev.RuleEnt, out var selectionComp))
+            return;
+
+        _antag.SetMaxAntags(selectionComp, dynamicProto.LimitSleeperAntag);
+    }
+
     private void OnRoundEndAppend(RoundEndTextAppendEvent ev)
     {
-        var query = EntityQueryEnumerator<TraitorDynamicsComponent>();
+        var dynamic = GetCurrentDynamic();
 
-        while (query.MoveNext(out _, out var dynamicComp))
-        {
-            ev.AddLine($"На смене был динамик агентов: {dynamicComp.CurrentDynamic}"); // TODO: add loc
-        }
+        if (!_prototype.TryIndex(dynamic, out var dynamicProto))
+            return;
+
+        ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.EndRoundNameDynamic)}");
     }
 
     private void OnTraitorRuleAdded(TraitorRuleAddedEvent ev)
     {
-        if (!TryComp<TraitorRuleComponent>(ev.RuleEnt, out var traitor))
+        if (!TryComp<TraitorRuleComponent>(ev.RuleEnt, out var _))
             return;
 
         if (!TryComp<TraitorDynamicsComponent>(ev.RuleEnt, out var dynamicComp))
