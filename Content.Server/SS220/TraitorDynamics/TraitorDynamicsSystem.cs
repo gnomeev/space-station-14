@@ -78,7 +78,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         if (!_prototype.TryIndex(dynamic, out var dynamicProto))
             return;
 
-        ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.EndRoundName)}");
+        ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.Name)}");
     }
 
     private void OnTraitorRuleAdded(TraitorRuleAddedEvent ev)

@@ -9,7 +9,7 @@ public sealed partial class DynamicPrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     [DataField]
-    public float DynamicPriceMultiplier = 2.0f;
+    public LocId Name;
 
     [DataField]
     public int LimitAntag;
@@ -18,10 +18,7 @@ public sealed partial class DynamicPrototype : IPrototype
     public int LimitSleeperAntag;
 
     [DataField]
-    public List<LocId> ListLoreName = new();
-
-    [DataField]
-    public LocId EndRoundName;
+    public ProtoId<DynamicNamePrototype> LoreNames;
 
     public LocId SelectedLoreName;
 }

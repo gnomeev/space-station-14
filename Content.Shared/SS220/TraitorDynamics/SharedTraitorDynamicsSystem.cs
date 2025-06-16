@@ -57,10 +57,14 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
         if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto))
             return;
 
-        dynamicProto.SelectedLoreName = _random.Pick(dynamicProto.ListLoreName);
         comp.CurrentDynamic = dynamicProto.ID;
         var ev = new DynamicAddedEvent(ent, dynamicProto.ID);
         RaiseLocalEvent(ev);
+
+        if (dynamicProto.LoreNames == default || !_prototype.TryIndex<DynamicNamePrototype>(dynamicProto.LoreNames, out var namesProto))
+            return;
+
+        dynamicProto.SelectedLoreName = _random.Pick(namesProto.ListNames);
     }
 
     /// <summary>
