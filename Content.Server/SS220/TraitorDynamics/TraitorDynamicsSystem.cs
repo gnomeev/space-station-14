@@ -4,6 +4,7 @@ using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.FixedPoint;
+using Content.Shared.GameTicking.Components;
 using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.SS220.TraitorDynamics.Components;
 using Content.Shared.Store;
@@ -77,7 +78,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         if (!_prototype.TryIndex(dynamic, out var dynamicProto))
             return;
 
-        ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.EndRoundNameDynamic)}");
+        ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.EndRoundName)}");
     }
 
     private void OnTraitorRuleAdded(TraitorRuleAddedEvent ev)

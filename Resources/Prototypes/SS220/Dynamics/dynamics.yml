@@ -3,21 +3,36 @@
   dynamicPriceMultiplier: 1.4
   limitAntag: 8
   limitSleeperAntag: 4
-  loreNameDynamic: dynamic-light-display-name
-  endRoundNameDynamic: dynamic-light-end-round-name
+  listLoreName:
+  - dynamic-light-name-1
+  - dynamic-light-name-2
+  - dynamic-light-name-3
+  - dynamic-light-name-4
+  - dynamic-light-name-5
+  endRoundName: dynamic-light-end-round-name
 
 - type: dynamic
   id: MediumDynamic
   dynamicPriceMultiplier: 1.8
   limitAntag: 6
   limitSleeperAntag: 2
-  loreNameDynamic: dynamic-medium-display-name
-  endRoundNameDynamic: dynamic-medium-end-round-name
+  listLoreName:
+  - dynamic-medium-name-1
+  - dynamic-medium-name-2
+  - dynamic-medium-name-3
+  - dynamic-medium-name-4
+  - dynamic-medium-name-5
+  endRoundName: dynamic-medium-end-round-name
 
 - type: dynamic
   id: HardDynamic
   dynamicPriceMultiplier: 2
   limitAntag: 5
   limitSleeperAntag: 1
-  loreNameDynamic: dynamic-hard-display-name
-  endRoundNameDynamic: dynamic-hard-end-round-name
+  listLoreName:
+  - dynamic-hard-name-1
+  - dynamic-hard-name-2
+  - dynamic-hard-name-3
+  - dynamic-hard-name-4
+  - dynamic-hard-name-5
+  endRoundName: dynamic-hard-end-round-name

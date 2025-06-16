@@ -28,6 +28,7 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 
     private void OnRuleAdded(ref GameRuleAddedEvent args)
     {
+        //gnv: мне всё-таки кажется что ивенты пренадлежащие к геймрулам стоит поднимать в геймруле, а сами классы ивентов перенести в компонент
         switch (args.RuleId)
         {
             case GameRuleTraitor:
@@ -40,7 +41,6 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
                 RaiseLocalEvent(evSleeper);
                 break;
         }
-
     }
 
     public string GetRandomDynamic()
@@ -57,6 +57,7 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
         if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto))
             return;
 
+        dynamicProto.SelectedLoreName = _random.Pick(dynamicProto.ListLoreName);
         comp.CurrentDynamic = dynamicProto.ID;
         var ev = new DynamicAddedEvent(ent, dynamicProto.ID);
         RaiseLocalEvent(ev);
@@ -68,6 +69,7 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
     /// <returns>installed dynamic</returns>
     public ProtoId<DynamicPrototype>? GetCurrentDynamic()
     {
+        //gnv: каждого треитор рула свой динамик, стоило бы проверять динамик у конкретного рула
         var query = EntityQueryEnumerator<TraitorDynamicsComponent>();
 
         while (query.MoveNext(out var comp))

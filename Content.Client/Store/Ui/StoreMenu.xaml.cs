@@ -100,15 +100,17 @@ public sealed partial class StoreMenu : DefaultWindow
     }
 
     //SS220 - show-in-uplink-type-dynamic-start
-    public void SetFooterDynamic(ProtoId<DynamicPrototype>? dynamic)
+    public void SetFooterDynamic(LocId? dynamicName)
     {
-        if (!_prototypeManager.TryIndex(dynamic, out var dynamicProto))
+        if (!TraitorFooter.Visible)
             return;
 
-        if (dynamic == default)
-            DynamicLabel.Text += " " + Loc.GetString("dynamic-unknown-display-name");
-
-        DynamicLabel.Text += " " + Loc.GetString(dynamicProto.LoreNameDynamic);
+        if (!dynamicName.HasValue)
+        {
+            DynamicLabel.Text += " " + Loc.GetString("dynamic-unknown-name");
+            return;
+        }
+        DynamicLabel.Text += " " + Loc.GetString(dynamicName);
     }
     //SS220 - show-in-uplink-type-dynamic-end
 

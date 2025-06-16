@@ -20,6 +20,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using Content.Shared.SS220.TraitorDynamics;
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -38,6 +40,8 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly UplinkSystem _uplink = default!;
+    [Dependency] private readonly SharedTraitorDynamicsSystem _dynamics = default!; //ss220-dynamics-info
+    [Dependency] private readonly IPrototypeManager _prototype = default!; //SS220-dynamics
 
     public override void Initialize()
     {
@@ -206,10 +210,19 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             {
                 code = generatedCode;
 
+                var dynamicInfo = string.Empty;
+                var dynamic = _dynamics.GetCurrentDynamic();
+                if (dynamic != default && _prototype.TryIndex<DynamicPrototype>(dynamic, out var dynamicProto))
+                {
+                    var cleanInfo = Regex.Replace(Loc.GetString(dynamicProto.EndRoundName), @"[^а-яА-ЯёЁ0-9\s.,!?-]", "");
+                    dynamicInfo = $"{Loc.GetString("dynamic-supply-level")} {cleanInfo}";
+                }
+
                 // If giveUplink is false the uplink code part is omitted
-                briefing = string.Format("{0}\n{1}",
+                briefing = string.Format("{0}\n{1}\n{2}",
                     briefing,
-                    Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))));
+                    Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))),
+                    dynamicInfo);
                 return (code, briefing);
             }
         }
@@ -240,6 +253,13 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             sb.AppendLine(Loc.GetString("traitor-role-uplink-code", ("code", string.Join("-", uplinkCode).Replace("sharp", "#"))));
         else
             sb.AppendLine(Loc.GetString("traitor-role-uplink-implant"));
+        //SS220-dynamics-info
+        var dynamic = _dynamics.GetCurrentDynamic();
+        if (dynamic != default && _prototype.TryIndex<DynamicPrototype>(dynamic, out var dynamicProto))
+        {
+            sb.AppendLine($"{Loc.GetString("dynamic-supply-level")} {Loc.GetString(dynamicProto.EndRoundName)}");
+        }
+        //SS220-dynamics-info
 
 
         return sb.ToString();

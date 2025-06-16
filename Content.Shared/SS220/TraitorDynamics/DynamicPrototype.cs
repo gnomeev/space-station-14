@@ -1,5 +1,3 @@
-using Content.Shared.Random;
-using Content.Shared.Store;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.SS220.TraitorDynamics;
@@ -20,8 +18,10 @@ public sealed partial class DynamicPrototype : IPrototype
     public int LimitSleeperAntag;
 
     [DataField]
-    public LocId LoreNameDynamic;
+    public List<LocId> ListLoreName = new();
 
     [DataField]
-    public LocId EndRoundNameDynamic;
+    public LocId EndRoundName;
+
+    public LocId SelectedLoreName;
 }
