@@ -1,14 +1,20 @@
 - type: dynamic
   id: LightDynamic
-  dynamicPriceMultiplier: 1.4
-  antagLimit: 8
+  limitAntag: 8
+  limitSleeperAntag: 4
+  name: dynamic-light-name
+  loreNames: NamesLightDynamic
 
 - type: dynamic
   id: MediumDynamic
-  dynamicPriceMultiplier: 1.8
-  antagLimit: 6
+  limitAntag: 6
+  limitSleeperAntag: 2
+  name: dynamic-medium-name
+  loreNames: NamesMediumDynamic
 
 - type: dynamic
   id: HardDynamic
-  dynamicPriceMultiplier: 2
-  antagLimit: 5
+  limitAntag: 5
+  limitSleeperAntag: 1
+  name: dynamic-hard-name
+  loreNames: NamesHardDynamic

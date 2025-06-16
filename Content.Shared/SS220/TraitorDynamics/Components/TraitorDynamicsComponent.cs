@@ -1,4 +1,5 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared.SS220.TraitorDynamics.Components;
 
@@ -9,7 +10,15 @@ public sealed partial class TraitorDynamicsComponent :Component
     public ProtoId<DynamicPrototype>? CurrentDynamic;
 }
 
+public sealed class TraitorSleeperAddedEvent : EntityEventArgs
+{
+    public EntityUid RuleEnt;
 
+    public TraitorSleeperAddedEvent(EntityUid ruleEnt)
+    {
+        RuleEnt = ruleEnt;
+    }
+}
 public sealed class TraitorRuleAddedEvent : EntityEventArgs
 {
     public EntityUid RuleEnt;

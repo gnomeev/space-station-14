@@ -1,6 +1,7 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
+using Content.Shared.SS220.TraitorDynamics; //SS220 - show-in-uplink-type-dynamic
 
 namespace Content.Shared.Store;
 
@@ -19,15 +20,22 @@ public sealed class StoreUpdateState : BoundUserInterfaceState
 
     public readonly bool ShowFooter;
 
+    //SS220 - show-in-uplink-type-dynamic-start
+    public readonly LocId? DynamicName;
+    //SS220 - show-in-uplink-type-dynamic-end
+
     public readonly bool AllowRefund;
 
-    public StoreUpdateState(HashSet<ListingDataWithCostModifiers> listings, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance, bool showFooter, bool allowRefund)
+    //SS220 - show-in-uplink-type-dynamic-start
+    public StoreUpdateState(HashSet<ListingDataWithCostModifiers> listings, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> balance, bool showFooter, bool allowRefund, LocId? dynamicName = default )
     {
         Listings = listings;
         Balance = balance;
         ShowFooter = showFooter;
         AllowRefund = allowRefund;
+        DynamicName = dynamicName;
     }
+    //SS220 - show-in-uplink-type-dynamic-end
 }
 
 [Serializable, NetSerializable]

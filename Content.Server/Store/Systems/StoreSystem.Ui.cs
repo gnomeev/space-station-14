@@ -16,6 +16,7 @@ using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using Content.Shared.SS220.TraitorDynamics; //SS220 - show-in-uplink-type-dynamic
 
 namespace Content.Server.Store.Systems;
 
@@ -30,6 +31,8 @@ public sealed partial class StoreSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly SharedTraitorDynamicsSystem  _dynamics = default!; //SS220 - show-in-uplink-type-dynamic
+    [Dependency] private readonly IPrototypeManager _prototype = default!; //SS220 - show-in-uplink-type-dynamic
 
     private void InitializeUi()
     {
@@ -109,8 +112,15 @@ public sealed partial class StoreSystem
 
         // only tell operatives to lock their uplink if it can be locked
         var showFooter = HasComp<RingerUplinkComponent>(store);
+        //SS220 - show-in-uplink-type-dynamic-start
+        var dynamic = _dynamics.GetCurrentDynamic();
+        LocId dynamicName = default;
 
-        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed);
+        if (_prototype.TryIndex(dynamic, out var dynamicProto))
+            dynamicName = dynamicProto.SelectedLoreName;
+
+        var state = new StoreUpdateState(component.LastAvailableListings, allCurrency, showFooter, component.RefundAllowed, dynamicName);
+        //SS220 - show-in-uplink-type-dynamic-end
         _ui.SetUiState(store, StoreUiKey.Key, state);
     }
 
