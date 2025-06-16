@@ -20,8 +20,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using Content.Shared.SS220.TraitorDynamics;
+using System.Text.RegularExpressions; //SS220-dynamics
+using Content.Shared.SS220.TraitorDynamics; //SS220-dynamics
 
 namespace Content.Server.GameTicking.Rules;
 
@@ -210,10 +210,12 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
             {
                 code = generatedCode;
 
+                //SS220-dynamics-in-brifing-start
                 var dynamicInfo = string.Empty;
                 var dynamic = _dynamics.GetCurrentDynamic();
                 if (dynamic != default && _prototype.TryIndex<DynamicPrototype>(dynamic, out var dynamicProto))
                 {
+                    //not support color tags
                     var cleanInfo = Regex.Replace(Loc.GetString(dynamicProto.EndRoundName), @"[^а-яА-ЯёЁ0-9\s.,!?-]", "");
                     dynamicInfo = $"{Loc.GetString("dynamic-supply-level")} {cleanInfo}";
                 }
@@ -223,6 +225,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
                     briefing,
                     Loc.GetString("traitor-role-uplink-code-short", ("code", string.Join("-", code).Replace("sharp", "#"))),
                     dynamicInfo);
+                //SS220-dynamics-in-brifing-end
                 return (code, briefing);
             }
         }
