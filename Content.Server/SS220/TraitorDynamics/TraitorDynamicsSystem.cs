@@ -23,11 +23,17 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TraitorRuleAddedEvent>(OnTraitorRuleAdded);
+
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
-        SubscribeLocalEvent<TraitorSleeperAddedEvent>(OnTraitorSleeperAdded);
         SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInit);
+        SubscribeLocalEvent<GameRuleAddedEvent>(OnGameRuleAdded);
+    }
+
+    private void OnGameRuleAdded(ref GameRuleAddedEvent ev)
+    {
+        if (TryComp<TraitorDynamicsComponent>(ev.RuleEntity, out var comp))
+            SetRandomDynamic(ev.RuleEntity, comp);
     }
 
     private void OnStoreInit(ref StoreInitializedEvent ev)
@@ -58,18 +64,6 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         _antag.SetMaxAntags(selectionComp, dynamic.LimitAntag);
     }
 
-    private void OnTraitorSleeperAdded(TraitorSleeperAddedEvent ev)
-    {
-        var dynamic = GetCurrentDynamic();
-
-        if (!_prototype.TryIndex(dynamic, out var dynamicProto))
-            return;
-
-        if (!TryComp<AntagSelectionComponent>(ev.RuleEnt, out var selectionComp))
-            return;
-
-        _antag.SetMaxAntags(selectionComp, dynamicProto.LimitSleeperAntag);
-    }
 
     private void OnRoundEndAppend(RoundEndTextAppendEvent ev)
     {
@@ -79,17 +73,5 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
             return;
 
         ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.Name)}");
-    }
-
-    private void OnTraitorRuleAdded(TraitorRuleAddedEvent ev)
-    {
-        if (!TryComp<TraitorRuleComponent>(ev.RuleEnt, out var _))
-            return;
-
-        if (!TryComp<TraitorDynamicsComponent>(ev.RuleEnt, out var dynamicComp))
-            return;
-
-        var dynamicStr = GetRandomDynamic();
-        SetDynamic(ev.RuleEnt, dynamicStr, dynamicComp);
     }
 }

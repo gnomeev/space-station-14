@@ -17,36 +17,17 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 
     [ValidatePrototypeId<WeightedRandomPrototype>]
     private const string WeightsProto = "WeightedDynamicsList";
-    private const string GameRuleTraitor = "Traitor";
-    private const string GameRuleSleeper = "SleeperAgents";
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<GameRuleAddedEvent>(OnRuleAdded);
-    }
-
-    private void OnRuleAdded(ref GameRuleAddedEvent args)
-    {
-        //gnv: мне всё-таки кажется что ивенты пренадлежащие к геймрулам стоит поднимать в геймруле, а сами классы ивентов перенести в компонент
-        switch (args.RuleId)
-        {
-            case GameRuleTraitor:
-                var evTraitor = new TraitorRuleAddedEvent(args.RuleEntity);
-                RaiseLocalEvent(evTraitor);
-                break;
-
-            case GameRuleSleeper:
-                var evSleeper = new TraitorSleeperAddedEvent(args.RuleEntity);
-                RaiseLocalEvent(evSleeper);
-                break;
-        }
-    }
 
     public string GetRandomDynamic()
     {
         var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
         return validWeight.Pick(_random);
+    }
+
+    public void SetRandomDynamic(EntityUid ent, TraitorDynamicsComponent? comp = null)
+    {
+        var dynamic = GetRandomDynamic();
+        SetDynamic(ent, dynamic, comp);
     }
 
     public void SetDynamic(EntityUid ent, string proto, TraitorDynamicsComponent? comp = null)
@@ -61,7 +42,7 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
         var ev = new DynamicAddedEvent(ent, dynamicProto.ID);
         RaiseLocalEvent(ev);
 
-        if (dynamicProto.LoreNames == default || !_prototype.TryIndex<DynamicNamePrototype>(dynamicProto.LoreNames, out var namesProto))
+        if (dynamicProto.LoreNames == default || !_prototype.TryIndex(dynamicProto.LoreNames, out var namesProto))
             return;
 
         dynamicProto.SelectedLoreName = _random.Pick(namesProto.ListNames);
