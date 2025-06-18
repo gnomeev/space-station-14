@@ -48,9 +48,9 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
             foreach (var listing in ev.Listings)
             {
                 if (!listing.DynamicsPrices.TryGetValue(comp.CurrentDynamic.Value, out var price))
-                    return;
+                    continue;
 
-                listing.AddCostModifier(comp.CurrentDynamic, price);
+                listing.SetExactPrice(comp.CurrentDynamic, price);
             }
         }
     }
