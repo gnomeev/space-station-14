@@ -59,13 +59,6 @@
   name: uplink-esword-name
   description: uplink-esword-desc
   icon: { sprite: /Textures/Objects/Weapons/Melee/e_sword.rsi, state: icon }
-  dynamicsPrices: #проавильная серилизация
-    LightDynamic:
-      Telecrystal: 100
-    MediumDynamic:
-      Telecrystal: 100
-    HardDynamic:
-      Telecrystal: 100
   discountCategory: veryRareDiscounts
   discountDownTo:
     Telecrystal: 8 #ss220-uplink-discounts
@@ -74,6 +67,13 @@
     Telecrystal: 10 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
+  dynamicsPrices: #проавильная серилизация
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
 
 - type: listing
   id: UplinkEnergyDagger
