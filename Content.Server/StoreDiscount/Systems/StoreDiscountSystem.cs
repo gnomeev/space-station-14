@@ -380,6 +380,7 @@ public sealed class StoreDiscountSystem : EntitySystem
         }
     }
 
+    //SS220 - dynamics - start
     /// <summary>
     /// Retrieves a dictionary of store items with their discount percentages that were previously installed
     /// </summary>
@@ -388,7 +389,7 @@ public sealed class StoreDiscountSystem : EntitySystem
     /// <returns>
     /// A dictionary where:
     ///   Key - item (listingId)
-    ///   Value - discount percentage (0-100)
+    ///   Value - dictionary CurrencyPrototype, FixPoint2 percentages
     /// </returns>
     public Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> GetItemsDiscount(
         EntityUid storeUid,
@@ -426,6 +427,7 @@ public sealed class StoreDiscountSystem : EntitySystem
 
         return result;
     }
+    //SS220 - dynamics - end
 }
 
 /// <summary>
