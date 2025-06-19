@@ -19,7 +19,10 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 {
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly StoreDiscountSystem _discount = default!;
 
+    [ValidatePrototypeId<StoreCategoryPrototype>]
+    private const string DiscountedStoreCategoryPrototypeKey = "DiscountedItems";
     public override void Initialize()
     {
         base.Initialize();
@@ -40,18 +43,12 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
     {
         var query = EntityQueryEnumerator<TraitorDynamicsComponent>();
 
-        while (query.MoveNext(out var comp))
+        while (query.MoveNext(out var traitorComponent))
         {
-            if (comp.CurrentDynamic == null)
+            if (traitorComponent.CurrentDynamic == null)
                 continue;
 
-            foreach (var listing in ev.Listings)
-            {
-                if (!listing.DynamicsPrices.TryGetValue(comp.CurrentDynamic.Value, out var price))
-                    continue;
-
-                listing.SetExactPrice(comp.CurrentDynamic, price);
-            }
+            ApplyDynamicPrice(ev, traitorComponent.CurrentDynamic.Value);
         }
     }
 
@@ -73,5 +70,46 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
             return;
 
         ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.Name)}");
+    }
+
+    private void ApplyDynamicPrice(StoreInitializedEvent ev,  ProtoId<DynamicPrototype> currentDynamic)
+    {
+        var itemDiscounts = _discount.GetItemsDiscount(ev.Store, ev.Listings);
+
+        foreach (var listing in ev.Listings)
+        {
+            if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
+                continue;
+
+            listing.SetNewCost(DiscountedStoreCategoryPrototypeKey, dynamicPrice);
+
+            var finalPrice = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscounts);
+            listing.SetExactPrice(DiscountedStoreCategoryPrototypeKey, finalPrice);
+        }
+    }
+
+    private Dictionary<ProtoId<CurrencyPrototype>,FixedPoint2> ApplyDiscountsToPrice(
+        Dictionary<ProtoId<CurrencyPrototype>,FixedPoint2> basePrice,
+        ListingDataWithCostModifiers listing,
+        Dictionary<string,Dictionary<ProtoId<CurrencyPrototype>,FixedPoint2>> itemDiscounts)
+    {
+        if (!itemDiscounts.TryGetValue(listing.ID, out var currencyDiscounts))
+            return basePrice;
+
+        var finalPrice = new Dictionary<ProtoId<CurrencyPrototype>,FixedPoint2>(basePrice);
+
+        foreach (var (currency, discountPercent) in currencyDiscounts)
+        {
+            if (!listing.OriginalCost.ContainsKey(currency))
+                continue;
+
+            if (!finalPrice.TryGetValue(currency, out var currentPrice))
+                continue;
+
+            var discountMultiplier = FixedPoint2.New(1) - (discountPercent / FixedPoint2.New(100));
+            finalPrice[currency] = currentPrice * discountMultiplier;
+        }
+
+        return finalPrice;
     }
 }
