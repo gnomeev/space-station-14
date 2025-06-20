@@ -233,6 +233,10 @@ public sealed partial class StoreMenu : DefaultWindow
             var enumerator = relativeModifiersSummary.GetEnumerator();
             enumerator.MoveNext();
             var amount = enumerator.Current.Value;
+            //SS220-modifier-cannot-be-0%-start
+             if (amount == 0)
+                 return string.Empty;
+            //SS220-modifier-cannot-be-0%-end
             discountMessage = Loc.GetString(
                 "store-ui-discount-display",
                 ("amount", (amount.ToString("P0")))

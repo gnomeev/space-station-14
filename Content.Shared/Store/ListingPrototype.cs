@@ -362,7 +362,7 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
         return true;
     }
 
-    //SS220 - set-exact-price-start
+    //SS220 - set-dynamics-price-start
     /// <summary>
     /// Sets an exact price for the listing, with help modifiers.
     /// </summary>
@@ -378,7 +378,15 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
         }
         AddCostModifier(modifierSourceId, mewModifier);
     }
-    //SS220 - set-exact-price-end
+    /// <summary>
+    /// Sets new prices
+    /// </summary>
+    /// <param name="newCost"> new OriginalCost</param>
+    public void SetNewCost(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newCost)
+    {
+        OriginalCost = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(newCost);
+    }
+    //SS220 - set-dynamics-price-end
 
     /// <summary>
     /// Gets percent of reduced/increased cost that modifiers give respective to <see cref="ListingData.OriginalCost"/>.

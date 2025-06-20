@@ -379,6 +379,53 @@ public sealed class StoreDiscountSystem : EntitySystem
             return null;
         }
     }
+
+    //SS220 - dynamics - start
+    /// <summary>
+    /// Retrieves a dictionary of store items with their discount percentages that were previously installed
+    /// </summary>
+    /// <param name="storeUid"> store entity.</param>
+    /// <param name="listings"> list of store listings with cost modifiers.</param>
+    /// <returns>
+    /// A dictionary where:
+    ///   Key - item (listingId)
+    ///   Value - dictionary CurrencyPrototype, FixPoint2 percentages
+    /// </returns>
+    public Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> GetItemsDiscount(
+        EntityUid storeUid,
+        IReadOnlyList<ListingDataWithCostModifiers> listings)
+    {
+        var result = new Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>>();
+
+        if (!TryComp<StoreDiscountComponent>(storeUid, out var discountComponent))
+            return result;
+
+        foreach (var discountData in discountComponent.Discounts)
+        {
+            var listing = listings.FirstOrDefault(l => l.ID == discountData.ListingId);
+            if (listing == null)
+                continue;
+
+            var discountPercentages = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>();
+
+            foreach (var (currency, discountAmount) in discountData.DiscountAmountByCurrency)
+            {
+                if (!listing.OriginalCost.TryGetValue(currency, out var originalPrice))
+                    continue;
+
+                var discountPercentage = (-discountAmount / originalPrice) * FixedPoint2.New(100);
+                discountPercentage = FixedPoint2.New(Math.Round(discountPercentage.Double(), 2));
+
+                discountPercentages[currency] = discountPercentage;
+            }
+
+            if (discountPercentages.Count > 0)
+                result[discountData.ListingId.ToString()] = discountPercentages;
+        }
+
+        return result;
+    }
+    //SS220 - dynamics - end
 }
 
 /// <summary>
