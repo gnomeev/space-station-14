@@ -379,14 +379,12 @@ public sealed partial class ListingDataWithCostModifiers : ListingData
         AddCostModifier(modifierSourceId, mewModifier);
     }
     /// <summary>
-    /// Sets new prices, while removing the selected modifier
+    /// Sets new prices
     /// </summary>
     /// <param name="newCost"> new OriginalCost</param>
-    /// <param name="modifierSourceId"> remove the modifier that prevents the final price </param>
-    public void SetNewCost(string modifierSourceId, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newCost)
+    public void SetNewCost(Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> newCost)
     {
         OriginalCost = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(newCost);
-        RemoveCostModifier(modifierSourceId);
     }
     //SS220 - set-dynamics-price-end
 

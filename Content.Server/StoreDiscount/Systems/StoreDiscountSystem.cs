@@ -420,9 +420,7 @@ public sealed class StoreDiscountSystem : EntitySystem
             }
 
             if (discountPercentages.Count > 0)
-            {
                 result[discountData.ListingId.ToString()] = discountPercentages;
-            }
         }
 
         return result;

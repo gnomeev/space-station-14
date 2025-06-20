@@ -81,7 +81,8 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
             if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
                 continue;
 
-            listing.SetNewCost(DiscountedStoreCategoryPrototypeKey, dynamicPrice);
+            listing.RemoveCostModifier(DiscountedStoreCategoryPrototypeKey);
+            listing.SetNewCost(dynamicPrice);
 
             var finalPrice = ApplyDiscountsToPrice(dynamicPrice, listing, itemDiscounts);
             listing.SetExactPrice(DiscountedStoreCategoryPrototypeKey, finalPrice);
