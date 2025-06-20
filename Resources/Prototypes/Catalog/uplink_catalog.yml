@@ -1949,6 +1949,15 @@
     Telecrystal: 6
   categories:
     - UplinkAllies
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 10
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 5
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSyndicatePersonalAI
@@ -2879,6 +2888,15 @@
     whitelist:
     - Botanist
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: uplinkRiggedBoxingGlovesPassenger
@@ -2896,6 +2914,15 @@
     - !type:BuyerJobCondition
       whitelist:
         - Passenger
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 7
+#ss220 dynamic-price end
 
 - type: listing
   id: uplinkRiggedBoxingGlovesBoxer
@@ -2958,6 +2985,15 @@
     blacklist:
       components:
       - SurplusBundle
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 30
+    MediumDynamic:
+      Telecrystal: 25
+    HardDynamic:
+      Telecrystal: 20
+#ss220 dynamic-price end
 
 - type: listing
   id: uplinkRevolverCapGunFake
@@ -2977,6 +3013,15 @@
     - Mime
     - Clown
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: uplinkBananaPeelExplosive
@@ -2996,6 +3041,15 @@
     whitelist:
     - Clown
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkClusterBananaPeel
@@ -3013,6 +3067,15 @@
   - !type:BuyerJobCondition
     whitelist:
     - Clown
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 4
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkHoloclownKit
@@ -3063,6 +3126,15 @@
     - Clown
     - Mime
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkChimpUpgradeKit
