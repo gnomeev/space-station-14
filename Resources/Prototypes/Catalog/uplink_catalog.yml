@@ -15,6 +15,15 @@
     Telecrystal: 1 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkRevolverPython
@@ -28,6 +37,15 @@
     Telecrystal: 4 # Originally was 13 and then 8 TC but was not used due to high cost
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 # Inbuilt suppressor so it's sneaky + more expensive.
 - type: listing
@@ -42,6 +60,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 # Poor accuracy, slow to fire, cheap option
 - type: listing
@@ -53,6 +80,15 @@
     Telecrystal: 1
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkEsword
@@ -67,13 +103,15 @@
     Telecrystal: 10 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
-  dynamicsPrices: #проавильная серилизация
+#ss220 dynamic-price bgn
+  dynamicsPrices:
     LightDynamic:
-      Telecrystal: 2
+      Telecrystal: 14
     MediumDynamic:
-      Telecrystal: 2
+      Telecrystal: 9
     HardDynamic:
-      Telecrystal: 2
+      Telecrystal: 7
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkEnergyDagger
@@ -88,6 +126,15 @@
     Telecrystal: 2
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkThrowingKnivesKit
@@ -102,6 +149,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
     - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkGlovesNorthStar
@@ -115,6 +171,15 @@
     Telecrystal: 10 #ss220-uplink-discounts
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 5
+    MediumDynamic:
+      Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 10
+#ss220 dynamic-price end
 
 # SS220-double-e-sword-begin
 - type: listing
@@ -143,6 +208,15 @@
 #          - LoneOpsUplink
 # SS220-uplink-fix-end
 # SS220-double-e-sword-end
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 22
+    MediumDynamic:
+      Telecrystal: 16
+    HardDynamic:
+      Telecrystal: 14
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkGlovesKnuckleDusters
@@ -157,6 +231,15 @@
     Telecrystal: 3 # SS220 knuckleduster-cost
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkDisposableTurret
@@ -184,6 +267,15 @@
 #        tags:
 #          - NukeOpsUplink
 # SS220-uplink-fix-end
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkEshield
@@ -219,6 +311,15 @@
     Telecrystal: 14 #ss220TTKUpdate
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 16
+    MediumDynamic:
+      Telecrystal: 12
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkC20RBundle
@@ -233,6 +334,15 @@
     Telecrystal: 17
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 19
+    MediumDynamic:
+      Telecrystal: 15
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkBulldogBundle
@@ -247,6 +357,15 @@
     Telecrystal: 20
   categories:
   - UplinkWeaponry
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 22
+    MediumDynamic:
+      Telecrystal: 16
+    HardDynamic:
+      Telecrystal: 10
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkGrenadeLauncherBundle
@@ -311,6 +430,15 @@
     Telecrystal: 4
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 7
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkExplosiveGrenadeFlash
@@ -321,6 +449,15 @@
     Telecrystal: 1
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSmokeGrenade
@@ -331,6 +468,15 @@
     Telecrystal: 1
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSyndieMiniBomb
@@ -344,6 +490,15 @@
     Telecrystal: 8 #ss220-uplink-discounts
   categories:
     - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSingularityGrenade
@@ -357,6 +512,15 @@
     Telecrystal: 2
   categories:
     - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkWhiteholeGrenade
@@ -370,6 +534,15 @@
     Telecrystal: 2
   categories:
     - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkGrenadePenguin
@@ -395,6 +568,15 @@
 #      - NukeOpsUplink
 #      - LoneOpsUplink
 # SS220-uplink-fix end
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 5
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 7
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkC4
@@ -408,6 +590,15 @@
     Telecrystal: 2
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkGrenadierRig
@@ -441,6 +632,15 @@
     Telecrystal: 10 #ss220-uplink-discounts
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 10
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkEmpGrenade
@@ -456,6 +656,15 @@
     Telecrystal: 1 #ss220-uplink-discounts
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkExplodingPen
@@ -470,6 +679,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSyndicateBomb
@@ -503,6 +721,15 @@
     Telecrystal: 8
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 12
+    MediumDynamic:
+      Telecrystal: 8
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkGrenadeShrapnel
@@ -516,6 +743,15 @@
     Telecrystal: 4
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkGrenadeIncendiary
@@ -529,6 +765,15 @@
     Telecrystal: 4
   categories:
   - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkEmpKit
@@ -542,6 +787,15 @@
     Telecrystal: 6
   categories:
     - UplinkExplosives
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 # Ammo
 
@@ -591,6 +845,15 @@
     Telecrystal: 4 #ss220TTKUpdate
   categories:
   - UplinkAmmo
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 # For the mosin
 - type: listing
@@ -650,6 +913,15 @@
     Telecrystal: 6
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkHypoDart
@@ -666,6 +938,15 @@
     Telecrystal: 1 #ss220-uplink-discounts
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkChemistryKitBundle
@@ -680,6 +961,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 6
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkZombieBundle
@@ -714,6 +1004,15 @@
     Telecrystal: 4 #ss220-uplink-discounts
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 12
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkCombatMedkit
@@ -727,6 +1026,15 @@
     Telecrystal: 5
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkCombatMedipen
@@ -740,6 +1048,15 @@
     Telecrystal: 4
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkStimpack
@@ -753,6 +1070,15 @@
     Telecrystal: 4
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkStimkit
@@ -766,6 +1092,15 @@
     Telecrystal: 12
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 14
+    MediumDynamic:
+      Telecrystal: 10
+    HardDynamic:
+      Telecrystal: 10
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkCigarettes
@@ -776,6 +1111,15 @@
     Telecrystal: 1
   categories:
   - UplinkChemicals
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkMedsBundle
@@ -814,6 +1158,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 5
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkStealthBox
@@ -827,6 +1180,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 10
+    MediumDynamic:
+      Telecrystal: 15
+    HardDynamic:
+      Telecrystal: 20
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkChameleonProjector
@@ -840,6 +1202,15 @@
     Telecrystal: 5 #ss220-uplink-discounts
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkHeadsetEncryptionKey
@@ -854,6 +1225,15 @@
     Telecrystal: 2
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkBinaryTranslatorKey
@@ -865,6 +1245,15 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkCyberpen
@@ -875,6 +1264,15 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkDecoyDisk
@@ -885,6 +1283,15 @@
     Telecrystal: 1
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkUltrabrightLantern
@@ -898,6 +1305,15 @@
     Telecrystal: 2
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkBribe
@@ -911,6 +1327,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
     - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 # - type: listing
 #   id: UplinkGigacancerScanner
@@ -935,6 +1360,15 @@
     Telecrystal: 6
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 6
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSyndicateBombFake
@@ -948,6 +1382,16 @@
     Telecrystal: 4
   categories:
   - UplinkDeception
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 4
+#ss220 dynamic-price end
+
 
 # Disruption
 
@@ -962,6 +1406,15 @@
   categories:
     - UplinkDisruption
 #ss220 ADD pen-signaller end
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkAccessBreaker
@@ -975,6 +1428,15 @@
     Telecrystal: 4
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 7
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkEmag
@@ -988,6 +1450,15 @@
     Telecrystal: 5
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 6
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkRadioJammer
@@ -1001,6 +1472,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 6
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSyndicateWeaponModule
@@ -1014,6 +1494,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSyndicateMartyrModule
@@ -1028,6 +1517,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
     - UplinkDisruption
+  #ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSoapSyndie
@@ -1043,6 +1541,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSlipocalypseClusterSoap
@@ -1056,6 +1563,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkToolbox
@@ -1069,6 +1585,15 @@
     Telecrystal: 2
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSyndicateJawsOfLife
@@ -1082,6 +1607,15 @@
     Telecrystal: 2
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 # Note: Removed for the time being until surgery/newmed is added. Considered bloat until then.
 # - type: listing
@@ -1114,6 +1648,15 @@
       blacklist:
         components:
           - SurplusBundle
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 12
+    HardDynamic:
+      Telecrystal: 12
+#ss220 dynamic-price end
 
 #   SS 220 -  Antimov Laws hided from uplink - begin
 # - type: listing
@@ -1237,6 +1780,15 @@
     Telecrystal: 1 #ss220-uplink-discounts
   categories:
   - UplinkDisruption
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 # Allies
 
@@ -1259,6 +1811,15 @@
       tags:
       - NukeOpsUplink
       - LoneOpsUplink
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 18
+    MediumDynamic:
+      Telecrystal: 14
+    HardDynamic:
+      Telecrystal: 10
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkReinforcementRadioSyndicate
@@ -1388,6 +1949,15 @@
     Telecrystal: 6
   categories:
     - UplinkAllies
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 10
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 5
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkSyndicatePersonalAI
@@ -1424,6 +1994,15 @@
         tags:
           - NukeOpsUplink
           - LoneOpsUplink
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 7
+    HardDynamic:
+      Telecrystal: 10
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkFreedomImplanter
@@ -1438,6 +2017,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
     - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkScramImplanter
@@ -1452,6 +2040,15 @@
     Telecrystal: 6 # it's a gamble that may kill you easily so 6 TC per 2 uses, second one more of a backup
   categories:
     - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkDnaScramblerImplant
@@ -1466,6 +2063,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
     - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 6
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkEmpImplanter
@@ -1482,6 +2088,15 @@
     Telecrystal: 4 #ss220 change uplink price after usptream 72
   categories:
     - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 5
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkRadioImplanter
@@ -1496,6 +2111,15 @@
     Telecrystal: 2
   categories:
   - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkMicroBombImplanter
@@ -1610,6 +2234,15 @@
     Telecrystal: 4
   categories:
   - UplinkImplants
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 3
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 
 # Wearables
@@ -1626,6 +2259,15 @@
     Telecrystal: 2
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkVoiceMask
@@ -1639,6 +2281,15 @@
     Telecrystal: 2
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkHolster
@@ -1649,6 +2300,15 @@
     Telecrystal: 1
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkChestRig
@@ -1659,6 +2319,15 @@
     Telecrystal: 1
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkChameleon
@@ -1673,6 +2342,15 @@
     Telecrystal: 3 #ss220-uplink-discounts
   categories:
     - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 6
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkClothingNoSlipsShoes
@@ -1686,6 +2364,15 @@
     Telecrystal: 4 #ss220-uplink-discounts
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 # TODO: Revert back to normal thieving gloves when clothes dyeing is added
 - type: listing
@@ -1700,6 +2387,15 @@
     Telecrystal: 2 #ss220-uplink-discounts
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 8
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkClothingOuterVestWeb
@@ -1713,6 +2409,15 @@
     Telecrystal: 3 #ss220 change uplink price after usptream 72
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkClothingOuterVestWebElite
@@ -1726,6 +2431,15 @@
     Telecrystal: 5
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkClothingShoesBootsMagSyndie
@@ -1739,6 +2453,15 @@
     Telecrystal: 4
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkEVASyndie
@@ -1755,6 +2478,15 @@
     Telecrystal: 1 #SS220-underused-uplinks-stuff
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkHardsuitCarp
@@ -1769,6 +2501,15 @@
     Telecrystal: 4
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkHardsuitSyndie
@@ -1795,6 +2536,15 @@
       blacklist:
         components:
           - SurplusBundle
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 18
+    MediumDynamic:
+      Telecrystal: 14
+    HardDynamic:
+      Telecrystal: 10
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkClothingOuterArmorRaid
@@ -1889,6 +2639,15 @@
   categories:
     - UplinkWearables
 #SS220 Syndie visor buff end
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkClothingConductingGloves
@@ -1899,6 +2658,15 @@
     Telecrystal: 2
   categories:
   - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 1
+    MediumDynamic:
+      Telecrystal: 1
+    HardDynamic:
+      Telecrystal: 1
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkBackpackSyndicate
@@ -1909,6 +2677,16 @@
     Telecrystal: 2
   categories:
     - UplinkWearables
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 2
+    HardDynamic:
+      Telecrystal: 2
+#ss220 dynamic-price end
+
 
  # Pointless
 
@@ -2110,6 +2888,15 @@
     whitelist:
     - Botanist
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: uplinkRiggedBoxingGlovesPassenger
@@ -2127,6 +2914,15 @@
     - !type:BuyerJobCondition
       whitelist:
         - Passenger
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 6
+    HardDynamic:
+      Telecrystal: 7
+#ss220 dynamic-price end
 
 - type: listing
   id: uplinkRiggedBoxingGlovesBoxer
@@ -2189,6 +2985,15 @@
     blacklist:
       components:
       - SurplusBundle
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 30
+    MediumDynamic:
+      Telecrystal: 25
+    HardDynamic:
+      Telecrystal: 20
+#ss220 dynamic-price end
 
 - type: listing
   id: uplinkRevolverCapGunFake
@@ -2208,6 +3013,15 @@
     - Mime
     - Clown
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 6
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: uplinkBananaPeelExplosive
@@ -2227,6 +3041,15 @@
     whitelist:
     - Clown
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 2
+    MediumDynamic:
+      Telecrystal: 3
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkClusterBananaPeel
@@ -2244,6 +3067,15 @@
   - !type:BuyerJobCondition
     whitelist:
     - Clown
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 8
+    MediumDynamic:
+      Telecrystal: 5
+    HardDynamic:
+      Telecrystal: 4
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkHoloclownKit
@@ -2263,6 +3095,16 @@
     whitelist:
     - Clown
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 18
+    MediumDynamic:
+      Telecrystal: 14
+    HardDynamic:
+      Telecrystal: 10
+#ss220 dynamic-price end
+
 
 - type: listing
   id: uplinkHotPotato
@@ -2284,6 +3126,15 @@
     - Clown
     - Mime
     - HeadOfPersonnel
+#ss220 dynamic-price bgn
+  dynamicsPrices:
+    LightDynamic:
+      Telecrystal: 4
+    MediumDynamic:
+      Telecrystal: 4
+    HardDynamic:
+      Telecrystal: 3
+#ss220 dynamic-price end
 
 - type: listing
   id: UplinkChimpUpgradeKit
