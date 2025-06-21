@@ -35,7 +35,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
-        SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInit);
+        SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInit,  before: [typeof(StoreDiscountSystem)]);
     }
 
     private void OnStoreInit(ref StoreInitializedEvent ev)
@@ -109,8 +109,9 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
             if (!finalPrice.TryGetValue(currency, out var currentPrice))
                 continue;
 
-            var discountMultiplier = FixedPoint2.New(1) - (discountPercent / FixedPoint2.New(100));
-            finalPrice[currency] = currentPrice * discountMultiplier;
+            var rawValue = currentPrice * discountPercent;
+            var roundedValue = Math.Round(rawValue.Double(), MidpointRounding.AwayFromZero);
+            finalPrice[currency] = FixedPoint2.New(roundedValue);
         }
 
         return finalPrice;
