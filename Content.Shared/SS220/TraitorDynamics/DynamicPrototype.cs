@@ -12,10 +12,9 @@ public sealed partial class DynamicPrototype : IPrototype
     public LocId Name;
 
     [DataField]
-    public int LimitAntag;
+    public Dictionary<string, int> AntagLimits = new();
 
-    [DataField]
-    public int LimitSleeperAntag;
+    public Dictionary<string, int> PlayersRequerment = new();
 
     [DataField]
     public ProtoId<DynamicNamePrototype> LoreNames;

@@ -3,7 +3,6 @@ using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using Content.Shared.SS220.TraitorDynamics.Components;
 
 namespace Content.Shared.SS220.TraitorDynamics;
 
@@ -18,34 +17,12 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
     [ValidatePrototypeId<WeightedRandomPrototype>]
     private const string WeightsProto = "WeightedDynamicsList";
 
+    protected ProtoId<DynamicPrototype>? CurrentDynamic = null; // prob we should have nullspace entity with comp
+
     public string GetRandomDynamic()
     {
         var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
         return validWeight.Pick(_random);
-    }
-
-    public void SetRandomDynamic(EntityUid ent, TraitorDynamicsComponent? comp = null)
-    {
-        var dynamic = GetRandomDynamic();
-        SetDynamic(ent, dynamic, comp);
-    }
-
-    public void SetDynamic(EntityUid ent, string proto, TraitorDynamicsComponent? comp = null)
-    {
-        if (!Resolve(ent, ref comp))
-            return;
-
-        if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto))
-            return;
-
-        comp.CurrentDynamic = dynamicProto.ID;
-        var ev = new DynamicAddedEvent(ent, dynamicProto.ID);
-        RaiseLocalEvent(ev);
-
-        if (dynamicProto.LoreNames == default || !_prototype.TryIndex(dynamicProto.LoreNames, out var namesProto))
-            return;
-
-        dynamicProto.SelectedLoreName = _random.Pick(namesProto.ListNames);
     }
 
     /// <summary>
@@ -54,13 +31,26 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
     /// <returns>installed dynamic</returns>
     public ProtoId<DynamicPrototype>? GetCurrentDynamic()
     {
-        //gnv: каждого треитор рула свой динамик, стоило бы проверять динамик у конкретного рула
-        var query = EntityQueryEnumerator<TraitorDynamicsComponent>();
+        return CurrentDynamic;
+    }
 
-        while (query.MoveNext(out var comp))
+    public sealed class DynamicAddedEvent : EntityEventArgs
+    {
+        public ProtoId<DynamicPrototype> Dynamic;
+
+        public DynamicAddedEvent(ProtoId<DynamicPrototype> dynamic)
         {
-            return comp.CurrentDynamic;
+            Dynamic = dynamic;
         }
-        return default;
+    }
+
+    public sealed class DynamicSetAttempt : CancellableEntityEventArgs
+    {
+        public ProtoId<DynamicPrototype> Dynamic;
+
+        public DynamicSetAttempt(ProtoId<DynamicPrototype> dynamic)
+        {
+            Dynamic = dynamic;
+        }
     }
 }

@@ -1,14 +1,16 @@
+using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Server.StoreDiscount.Systems;
+using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Prototypes;
 using Content.Shared.SS220.TraitorDynamics;
-using Content.Shared.SS220.TraitorDynamics.Components;
 using Content.Shared.Store;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 
 namespace Content.Server.SS220.TraitorDynamics;
 
@@ -19,10 +21,14 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 {
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StoreDiscountSystem _discount = default!;
+    [Dependency] private readonly AdminLogManager _admin = default!;
+    [Dependency] private readonly GameTicker _gameTicker = default!;
 
     [ValidatePrototypeId<StoreCategoryPrototype>]
     private const string DiscountedStoreCategoryPrototypeKey = "DiscountedItems";
+
     public override void Initialize()
     {
         base.Initialize();
@@ -30,35 +36,31 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
         SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
         SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInit);
-        SubscribeLocalEvent<GameRuleAddedEvent>(OnGameRuleAdded);
-    }
-
-    private void OnGameRuleAdded(ref GameRuleAddedEvent ev)
-    {
-        if (TryComp<TraitorDynamicsComponent>(ev.RuleEntity, out var comp))
-            SetRandomDynamic(ev.RuleEntity, comp);
     }
 
     private void OnStoreInit(ref StoreInitializedEvent ev)
     {
-        var query = EntityQueryEnumerator<TraitorDynamicsComponent>();
+        if (CurrentDynamic == null)
+            return;
 
-        while (query.MoveNext(out var traitorComponent))
-        {
-            if (traitorComponent.CurrentDynamic == null)
-                continue;
-
-            ApplyDynamicPrice(ev, traitorComponent.CurrentDynamic.Value);
-        }
+        ApplyDynamicPrice(ev.Store, ev.Listings, CurrentDynamic.Value);
     }
 
     private void OnDynamicAdded(DynamicAddedEvent ev)
     {
-        if (!TryComp<AntagSelectionComponent>(ev.Entity, out var selectionComp))
-            return;
-
         var dynamic = _prototype.Index(ev.Dynamic);
-        _antag.SetMaxAntags(selectionComp, dynamic.LimitAntag);
+        var rules = _gameTicker.GetAllGameRulePrototypes();
+
+        foreach (var rule in rules)
+        {
+            if (!rule.TryGetComponent<AntagSelectionComponent>(out var selection, EntityManager.ComponentFactory))
+                continue;
+
+            if (!dynamic.AntagLimits.TryGetValue(rule.ID, out var value))
+                continue;
+
+            _antag.SetMaxAntags(selection, value);
+        }
     }
 
 
@@ -72,11 +74,11 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.Name)}");
     }
 
-    private void ApplyDynamicPrice(StoreInitializedEvent ev,  ProtoId<DynamicPrototype> currentDynamic)
+    private void ApplyDynamicPrice(EntityUid store, IReadOnlyList<ListingDataWithCostModifiers> listings, ProtoId<DynamicPrototype> currentDynamic)
     {
-        var itemDiscounts = _discount.GetItemsDiscount(ev.Store, ev.Listings);
+        var itemDiscounts = _discount.GetItemsDiscount(store, listings);
 
-        foreach (var listing in ev.Listings)
+        foreach (var listing in listings)
         {
             if (!listing.DynamicsPrices.TryGetValue(currentDynamic, out var dynamicPrice))
                 continue;
@@ -89,15 +91,15 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         }
     }
 
-    private Dictionary<ProtoId<CurrencyPrototype>,FixedPoint2> ApplyDiscountsToPrice(
-        Dictionary<ProtoId<CurrencyPrototype>,FixedPoint2> basePrice,
+    private Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> ApplyDiscountsToPrice(
+        Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> basePrice,
         ListingDataWithCostModifiers listing,
-        Dictionary<string,Dictionary<ProtoId<CurrencyPrototype>,FixedPoint2>> itemDiscounts)
+        Dictionary<string, Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>> itemDiscounts)
     {
         if (!itemDiscounts.TryGetValue(listing.ID, out var currencyDiscounts))
             return basePrice;
 
-        var finalPrice = new Dictionary<ProtoId<CurrencyPrototype>,FixedPoint2>(basePrice);
+        var finalPrice = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>(basePrice);
 
         foreach (var (currency, discountPercent) in currencyDiscounts)
         {
@@ -112,5 +114,34 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         }
 
         return finalPrice;
+    }
+
+    public void SetRandomDynamic()
+    {
+        var dynamic = GetRandomDynamic();
+        SetDynamic(dynamic);
+    }
+
+    public void SetDynamic(string proto)
+    {
+        if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto, true))
+            return;
+
+        var attemptEv = new DynamicSetAttempt(dynamicProto.ID);
+        RaiseLocalEvent(attemptEv);
+
+        if (attemptEv.Cancelled)
+            return;
+
+        CurrentDynamic = dynamicProto;
+        _admin.Add(LogType.AntagSelection, LogImpact.High, $"Dynamic {dynamicProto.Name} was setted"); // TODO: log type must be changed
+
+        var ev = new DynamicAddedEvent(dynamicProto.ID);
+        RaiseLocalEvent(ev);
+
+        if (dynamicProto.LoreNames == default || !_prototype.TryIndex(dynamicProto.LoreNames, out var namesProto))
+            return;
+
+        dynamicProto.SelectedLoreName = _random.Pick(namesProto.ListNames);
     }
 }
