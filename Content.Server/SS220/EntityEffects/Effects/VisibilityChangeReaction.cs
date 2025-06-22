@@ -1,3 +1,4 @@
+using Content.Server.SS220.Stealth.TemporalStealth;
 using Content.Server.Stealth;
 using Content.Shared.EntityEffects;
 using Content.Shared.Stealth.Components;
@@ -17,10 +18,13 @@ public sealed partial class VisibilityChangeReaction : EntityEffect
     [DataField]
     public float VisibilityChange = 0.7f;
 
+    [DataField]
+    public TimeSpan Duration = TimeSpan.FromSeconds(6);
+
     public override void Effect(EntityEffectBaseArgs args)
     {
         var lookupSystem = args.EntityManager.System<EntityLookupSystem>();
-        var stealthSystem = args.EntityManager.System<StealthSystem>();
+        var stealthSystem = args.EntityManager.System<TemporalStealthSystem>();
         var transformSystem = args.EntityManager.System<TransformSystem>();
 
         var transform = args.EntityManager.GetComponent<TransformComponent>(args.TargetEntity);
@@ -28,19 +32,12 @@ public sealed partial class VisibilityChangeReaction : EntityEffect
 
         if (args is EntityEffectReagentArgs reagentArgs)
         {
-            range = MathF.Min((float) (reagentArgs.Quantity * RangePerUnit), MaxRange);
+            range = MathF.Min((float)(reagentArgs.Quantity * RangePerUnit), MaxRange);
         }
 
         foreach (var ent in lookupSystem.GetEntitiesInRange(transformSystem.GetMapCoordinates(args.TargetEntity, xform: transform), range))
         {
-            if (!args.EntityManager.HasComponent<StealthComponent>(ent))
-                args.EntityManager.EnsureComponent<StealthComponent>(ent);
-
-            if (args.EntityManager.TryGetComponent<StealthComponent>(ent, out var stealth))
-            {
-                var effectVisibility = stealthSystem.GetVisibility(ent, stealth) + VisibilityChange;
-                stealthSystem.SetVisibility(ent, effectVisibility, stealth);
-            }
+            stealthSystem.ActivateTemporalStealth(ent, VisibilityChange, Duration);
         }
     }
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)

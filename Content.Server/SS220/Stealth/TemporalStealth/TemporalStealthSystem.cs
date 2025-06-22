@@ -18,25 +18,24 @@ public sealed class TemporalStealthSystem : EntitySystem
 
     private void OnCompShutdown(Entity<TemporalStealthComponent> ent, ref ComponentShutdown args)
     {
-        if (!ent.Comp.HasComp)
+        if (ent.Comp.OriginalStealthEnabled.HasValue)
         {
-            RemCompDeferred<StealthComponent>(ent);
-            return;
+            _stealth.SetEnabled(ent, ent.Comp.OriginalStealthEnabled.Value);
         }
-
-        _stealth.SetEnabled(ent, false);
+        else
+        {
+            RemComp<StealthComponent>(ent);
+        }
     }
 
     private void OnCompStartup(Entity<TemporalStealthComponent> ent, ref ComponentStartup args)
     {
-        ent.Comp.LastStealthTime = _gameTiming.CurTime + ent.Comp.StealthTime;
-        ent.Comp.HasComp = HasComp<StealthComponent>(ent);
+        ent.Comp.OriginalStealthEnabled = TryComp<StealthComponent>(ent, out var comp) ? comp.Enabled : null;
 
-        if (!ent.Comp.HasComp)
-            EnsureComp<StealthComponent>(ent);
+        var stealth = EnsureComp<StealthComponent>(ent);
 
-        _stealth.SetEnabled(ent, true);
-        _stealth.SetVisibility(ent, ent.Comp.Visibility);
+        _stealth.SetEnabled(ent, true, stealth);
+        _stealth.ModifyVisibility(ent, ent.Comp.Visibility, stealth);
     }
 
     public override void Update(float frameTime)
@@ -55,7 +54,10 @@ public sealed class TemporalStealthSystem : EntitySystem
 
     public void ActivateTemporalStealth(EntityUid uid, float visibility, TimeSpan duration)
     {
-        var temporal = EnsureComp<TemporalStealthComponent>(uid);
+        if (duration <= TimeSpan.Zero)
+            return;
+
+        var temporal = AddComp<TemporalStealthComponent>(uid);
         temporal.Visibility = visibility;
         temporal.StealthTime = duration;
         temporal.LastStealthTime = _gameTiming.CurTime + duration;
