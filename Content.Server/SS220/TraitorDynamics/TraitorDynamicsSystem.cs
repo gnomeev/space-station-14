@@ -23,7 +23,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly StoreDiscountSystem _discount = default!;
-    [Dependency] private readonly AdminLogManager _admin = default!;
+    [Dependency] private readonly IAdminLogManager _admin = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
 
     [ValidatePrototypeId<StoreCategoryPrototype>]

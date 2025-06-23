@@ -211,7 +211,6 @@
       lateJoinAdditional: true
       mindRoles:
       - MindRoleTraitor
-  - type: TraitorDynamics # ss220 dynamics
 
 #- type: entity
 #  id: Sandbox
