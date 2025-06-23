@@ -12,15 +12,16 @@ public sealed class TemporalStealthSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<TemporalStealthComponent, ComponentStartup>(OnCompStartup);
+        SubscribeLocalEvent<TemporalStealthComponent, TemporalStealthAddedEvent>(OnStealthAdded);
         SubscribeLocalEvent<TemporalStealthComponent, ComponentShutdown>(OnCompShutdown);
     }
 
     private void OnCompShutdown(Entity<TemporalStealthComponent> ent, ref ComponentShutdown args)
     {
-        if (ent.Comp.OriginalStealthEnabled.HasValue)
+        if (ent.Comp is { OriginalStealthEnabled: not null, OriginalVisibility: not null })
         {
             _stealth.SetEnabled(ent, ent.Comp.OriginalStealthEnabled.Value);
+            _stealth.SetVisibility(ent, ent.Comp.OriginalVisibility.Value);
         }
         else
         {
@@ -28,9 +29,12 @@ public sealed class TemporalStealthSystem : EntitySystem
         }
     }
 
-    private void OnCompStartup(Entity<TemporalStealthComponent> ent, ref ComponentStartup args)
+    private void OnStealthAdded(Entity<TemporalStealthComponent> ent, ref TemporalStealthAddedEvent args)
     {
         ent.Comp.OriginalStealthEnabled = TryComp<StealthComponent>(ent, out var comp) ? comp.Enabled : null;
+
+        if (ent.Comp.OriginalStealthEnabled.HasValue)
+            ent.Comp.OriginalVisibility = _stealth.GetVisibility(ent, comp);
 
         var stealth = EnsureComp<StealthComponent>(ent);
 
@@ -52,16 +56,21 @@ public sealed class TemporalStealthSystem : EntitySystem
         }
     }
 
-    public void ActivateTemporalStealth(EntityUid uid, float visibility, TimeSpan duration)
+    public void ActivateTemporalStealth(EntityUid target, float visibility, TimeSpan duration)
     {
         if (duration <= TimeSpan.Zero)
             return;
 
-        var temporal = AddComp<TemporalStealthComponent>(uid);
+        if (TryComp<TemporalStealthComponent>(target, out var has))
+            has.StealthTime += duration;
+
+        var temporal = EnsureComp<TemporalStealthComponent>(target);
         temporal.Visibility = visibility;
         temporal.StealthTime = duration;
         temporal.LastStealthTime = _gameTiming.CurTime + duration;
+        Dirty(target, temporal);
 
-        Dirty(uid, temporal);
+        var ev = new TemporalStealthAddedEvent();
+        RaiseLocalEvent(target, ev);
     }
 }

@@ -15,4 +15,9 @@ public sealed partial class TemporalStealthComponent : Component
     public TimeSpan LastStealthTime;
 
     public bool? OriginalStealthEnabled;
+    public float? OriginalVisibility;
+}
+
+public sealed partial class TemporalStealthAddedEvent() : EntityEventArgs
+{
 }

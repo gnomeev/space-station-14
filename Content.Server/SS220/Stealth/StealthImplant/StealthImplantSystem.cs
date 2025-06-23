@@ -1,10 +1,5 @@
 using Content.Server.SS220.Stealth.TemporalStealth;
-using Content.Server.Stealth;
-using Content.Shared.Implants.Components;
 using Content.Shared.SS220.Stealth.StealthImplant;
-using Content.Shared.SS220.Stealth.TemporalStealth;
-using Content.Shared.Stealth.Components;
-using Robust.Shared.Timing;
 
 namespace Content.Server.SS220.Stealth.StealthImplant;
 
