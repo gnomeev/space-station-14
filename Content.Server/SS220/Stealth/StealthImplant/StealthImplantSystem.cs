@@ -22,7 +22,7 @@ public sealed class StealthImplantSystem : EntitySystem
         if (args.Handled)
             return;
 
-        _temporal.ActivateTemporalStealth(ent, ent.Comp.Visibility, ent.Comp.StealthTime);
+        _temporal.ActivateTemporalStealth(args.Performer, ent.Comp.Visibility, ent.Comp.StealthTime);
         args.Handled = true;
     }
 }

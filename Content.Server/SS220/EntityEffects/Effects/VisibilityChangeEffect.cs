@@ -12,18 +12,13 @@ public sealed partial class VisibilityChangeEffect : EntityEffect
     public float VisibilityChange = 0.5f;
 
     [DataField]
-    public TimeSpan VisibilityDuration = TimeSpan.FromSeconds(1);
+    public TimeSpan Duration = TimeSpan.FromSeconds(2);
 
     public override void Effect(EntityEffectBaseArgs args)
     {
-        var stealthSystem = args.EntityManager.System<SharedStealthSystem>();
-        var temporalSystem = args.EntityManager.System<TemporalStealthSystem>();
+        var stealthSystem = args.EntityManager.System<TemporalStealthSystem>();
 
-        if (args.EntityManager.TryGetComponent<StealthComponent>(args.TargetEntity, out var stealth))
-        {
-            var effectVisibility = stealthSystem.GetVisibility(args.TargetEntity, stealth) + VisibilityChange;
-            temporalSystem.ActivateTemporalStealth(args.TargetEntity, effectVisibility, VisibilityDuration);
-        }
+        stealthSystem.ActivateTemporalStealth(args.TargetEntity, VisibilityChange, Duration);
     }
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
     {

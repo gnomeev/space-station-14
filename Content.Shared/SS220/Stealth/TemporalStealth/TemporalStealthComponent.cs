@@ -1,17 +1,18 @@
+using Robust.Shared.GameStates;
+
 namespace Content.Shared.SS220.Stealth.TemporalStealth;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class TemporalStealthComponent : Component
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public float Visibility;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan StealthTime;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public TimeSpan LastStealthTime;
 
-    [DataField]
-    public bool HasComp;
+    public bool? OriginalStealthEnabled;
 }

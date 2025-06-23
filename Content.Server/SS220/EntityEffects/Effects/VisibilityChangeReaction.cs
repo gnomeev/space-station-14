@@ -19,7 +19,7 @@ public sealed partial class VisibilityChangeReaction : EntityEffect
     public float VisibilityChange = 0.7f;
 
     [DataField]
-    public TimeSpan StealthTime = TimeSpan.FromSeconds(2);
+    public TimeSpan Duration = TimeSpan.FromSeconds(6);
 
     public override void Effect(EntityEffectBaseArgs args)
     {
@@ -32,12 +32,12 @@ public sealed partial class VisibilityChangeReaction : EntityEffect
 
         if (args is EntityEffectReagentArgs reagentArgs)
         {
-            range = MathF.Min((float) (reagentArgs.Quantity * RangePerUnit), MaxRange);
+            range = MathF.Min((float)(reagentArgs.Quantity * RangePerUnit), MaxRange);
         }
 
         foreach (var ent in lookupSystem.GetEntitiesInRange(transformSystem.GetMapCoordinates(args.TargetEntity, xform: transform), range))
         {
-            stealthSystem.ActivateTemporalStealth(ent, VisibilityChange, StealthTime);
+            stealthSystem.ActivateTemporalStealth(ent, VisibilityChange, Duration);
         }
     }
     protected override string? ReagentEffectGuidebookText(IPrototypeManager prototype, IEntitySystemManager entSys)
