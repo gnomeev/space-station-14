@@ -14,7 +14,8 @@ public sealed partial class DynamicPrototype : IPrototype
     [DataField]
     public Dictionary<string, int> AntagLimits = new();
 
-    public Dictionary<string, int> PlayersRequerment = new();
+    [DataField]
+    public int PlayersRequerment;
 
     [DataField]
     public ProtoId<DynamicNamePrototype> LoreNames;

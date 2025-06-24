@@ -1,3 +1,5 @@
+using Content.Shared.Administration.Logs;
+using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
@@ -13,16 +15,44 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
     [ValidatePrototypeId<WeightedRandomPrototype>]
     private const string WeightsProto = "WeightedDynamicsList";
 
     protected ProtoId<DynamicPrototype>? CurrentDynamic = null; // prob we should have nullspace entity with comp
 
-    public string GetRandomDynamic()
+    public string GetRandomDynamic(int playerCount)
     {
         var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
-        return validWeight.Pick(_random);
+         var tempWeight = validWeight;
+
+         var selectedDynamic = string.Empty;
+
+         while (tempWeight.Weights.Keys.Count > 0)
+         {
+             var currentDynamic = tempWeight.Pick(_random);
+
+             if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
+             {
+                 tempWeight.Weights.Remove(currentDynamic);
+                 continue;
+             }
+
+             if (playerCount <= dynamicProto.PlayersRequerment)
+             {
+                 selectedDynamic = currentDynamic;
+                 break;
+             }
+             else
+             {
+                 _adminLog.Add(LogType.AntagSelection, LogImpact.High, $"динамик {currentDynamic} не установлен");
+                 tempWeight.Weights.Remove(currentDynamic);
+             }
+
+         }
+
+        return selectedDynamic;
     }
 
     /// <summary>
