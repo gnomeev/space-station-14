@@ -121,7 +121,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
     public void SetRandomDynamic()
     {
-        var countPlayers = _antag.GetTotalPlayerCount(_player.Sessions);
+        var countPlayers = _gameTicker.ReadyPlayerCount();
         var dynamic = GetRandomDynamic(countPlayers);
         SetDynamic(dynamic);
     }
