@@ -1,6 +1,3 @@
-using Content.Shared.Administration.Logs;
-using Content.Shared.Database;
-using Content.Shared.GameTicking.Components;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
@@ -15,7 +12,6 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 {
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
-    [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
 
     [ValidatePrototypeId<WeightedRandomPrototype>]
     private const string WeightsProto = "WeightedDynamicsList";
@@ -63,16 +59,11 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
     {
         selectedDynamic = string.Empty;
 
-        if (playerCount <= dynamicProto.PlayersRequerment)
-        {
-            selectedDynamic = currentDynamic;
-            return true;
-        }
-        else
-        {
-            _adminLog.Add(LogType.AntagSelection, LogImpact.High, $"динамик {currentDynamic} не установлен"); //locale
+        if (playerCount > dynamicProto.PlayersRequerment)
             return false;
-        }
+
+        selectedDynamic = currentDynamic;
+        return true;
     }
 
 

@@ -5,11 +5,8 @@ using Content.Server.GameTicking;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
-using Content.Shared.GameTicking.Components;
-using Content.Shared.Prototypes;
 using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.Store;
-using Robust.Server.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -26,7 +23,6 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
     [Dependency] private readonly StoreDiscountSystem _discount = default!;
     [Dependency] private readonly IAdminLogManager _admin = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
-    [Dependency] private readonly IPlayerManager _player = default!;
 
     [ValidatePrototypeId<StoreCategoryPrototype>]
     private const string DiscountedStoreCategoryPrototypeKey = "DiscountedItems";
