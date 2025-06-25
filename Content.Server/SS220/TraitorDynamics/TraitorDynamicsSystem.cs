@@ -5,8 +5,6 @@ using Content.Server.GameTicking;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
-using Content.Shared.GameTicking.Components;
-using Content.Shared.Prototypes;
 using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.Store;
 using Robust.Shared.Prototypes;
@@ -71,7 +69,8 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         if (!_prototype.TryIndex(dynamic, out var dynamicProto))
             return;
 
-        ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.Name)}");
+        var locName = Loc.GetString(dynamicProto.Name);
+        ev.AddLine(Loc.GetString("dynamic-show-end-round", ("dynamic", locName)));
     }
 
     private void ApplyDynamicPrice(EntityUid store, IReadOnlyList<ListingDataWithCostModifiers> listings, ProtoId<DynamicPrototype> currentDynamic)
@@ -119,7 +118,8 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
     public void SetRandomDynamic()
     {
-        var dynamic = GetRandomDynamic();
+        var countPlayers = _gameTicker.ReadyPlayerCount();
+        var dynamic = GetRandomDynamic(countPlayers);
         SetDynamic(dynamic);
     }
 

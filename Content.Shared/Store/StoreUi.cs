@@ -1,7 +1,6 @@
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
-using Content.Shared.SS220.TraitorDynamics; //SS220 - show-in-uplink-type-dynamic
 
 namespace Content.Shared.Store;
 

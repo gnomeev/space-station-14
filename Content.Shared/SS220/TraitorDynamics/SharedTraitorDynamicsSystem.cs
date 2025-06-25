@@ -1,4 +1,3 @@
-using Content.Shared.GameTicking.Components;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
@@ -19,11 +18,54 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 
     protected ProtoId<DynamicPrototype>? CurrentDynamic = null; // prob we should have nullspace entity with comp
 
-    public string GetRandomDynamic()
+    /// <summary>
+    /// Gets a random DynamicPrototype from WeightedRandomPrototype, weeding out unsuitable dynamics
+    /// </summary>
+    /// <param name="playerCount"> current number of ready players, by this indicator the required number is compared </param>
+    /// <param name="force"> ignore player checks and force any dynamics </param>
+    /// <returns></returns>
+    public string GetRandomDynamic(int playerCount = default, bool force = false)
     {
         var validWeight = _prototype.Index<WeightedRandomPrototype>(WeightsProto);
-        return validWeight.Pick(_random);
+        var tempWeight = validWeight;
+        var selectedDynamic = string.Empty;
+
+        while (tempWeight.Weights.Keys.Count > 0)
+        {
+            var currentDynamic = tempWeight.Pick(_random);
+
+            if (!_prototype.TryIndex<DynamicPrototype>(currentDynamic, out var dynamicProto))
+            {
+                tempWeight.Weights.Remove(currentDynamic);
+                continue;
+            }
+
+            if (playerCount == default || force)
+            {
+                selectedDynamic = dynamicProto.Name;
+                break;
+            }
+
+            if (TrySelectDynamic(currentDynamic, dynamicProto, playerCount, out selectedDynamic))
+                break;
+            else
+                tempWeight.Weights.Remove(currentDynamic);
+        }
+
+        return selectedDynamic;
     }
+
+    private bool TrySelectDynamic(string currentDynamic, DynamicPrototype dynamicProto, int playerCount, out string selectedDynamic)
+    {
+        selectedDynamic = string.Empty;
+
+        if (playerCount > dynamicProto.PlayersRequerment)
+            return false;
+
+        selectedDynamic = currentDynamic;
+        return true;
+    }
+
 
     /// <summary>
     /// Tries to find the type of dynamic while in Traitor game rule

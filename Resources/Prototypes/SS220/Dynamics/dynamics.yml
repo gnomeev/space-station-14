@@ -1,20 +1,26 @@
 - type: dynamic
   id: LightDynamic
-  limitAntag: 8
-  limitSleeperAntag: 4
+  antagLimits:
+    Traitor: 8
+    SleeperAgents: 4
+  playersRequerment: 25
   name: dynamic-light-name
   loreNames: NamesLightDynamic
 
 - type: dynamic
   id: MediumDynamic
-  limitAntag: 6
-  limitSleeperAntag: 2
+  antagLimits:
+    Traitor: 6
+    SleeperAgents: 2
+  playersRequerment: 25
   name: dynamic-medium-name
   loreNames: NamesMediumDynamic
 
 - type: dynamic
   id: HardDynamic
-  limitAntag: 5
-  limitSleeperAntag: 1
+  antagLimits:
+    Traitor: 4
+    SleeperAgents: 1
+  playersRequerment: 25
   name: dynamic-hard-name
   loreNames: NamesHardDynamic

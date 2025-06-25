@@ -1,4 +1,4 @@
-dynamic-show-end-round = В раунде был динамик агентов:
+dynamic-show-end-round = В раунде был динамик агентов: {$dynamic}
 dynamic-supply-level = Уровень снабжения агентов в секторе: 
 dynamic-type-label = Название операции:
 
