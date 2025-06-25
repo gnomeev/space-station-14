@@ -69,7 +69,8 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         if (!_prototype.TryIndex(dynamic, out var dynamicProto))
             return;
 
-        ev.AddLine($"{Loc.GetString("dynamic-show-end-round")} {Loc.GetString(dynamicProto.Name)}");
+        var locName = Loc.GetString(dynamicProto.Name);
+        ev.AddLine(Loc.GetString("dynamic-show-end-round", ("dynamic", locName)));
     }
 
     private void ApplyDynamicPrice(EntityUid store, IReadOnlyList<ListingDataWithCostModifiers> listings, ProtoId<DynamicPrototype> currentDynamic)
