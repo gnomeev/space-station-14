@@ -1,3 +1,5 @@
+// © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Prototypes;
@@ -6,7 +8,7 @@ using Robust.Shared.Random;
 namespace Content.Shared.SS220.TraitorDynamics;
 
 /// <summary>
-/// This handles...
+/// Shared part of TraitorDynamics
 /// </summary>
 public abstract class SharedTraitorDynamicsSystem : EntitySystem
 {
@@ -59,11 +61,12 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
     {
         selectedDynamic = string.Empty;
 
-        if (playerCount > dynamicProto.PlayersRequerment)
+        if (playerCount < dynamicProto.PlayersRequerment)
             return false;
 
         selectedDynamic = currentDynamic;
         return true;
+
     }
 
 
