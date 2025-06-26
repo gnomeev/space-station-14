@@ -6,7 +6,7 @@ using Robust.Shared.Random;
 namespace Content.Shared.SS220.TraitorDynamics;
 
 /// <summary>
-/// This handles...
+/// Shared part of TraitorDynamics
 /// </summary>
 public abstract class SharedTraitorDynamicsSystem : EntitySystem
 {
@@ -59,11 +59,12 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
     {
         selectedDynamic = string.Empty;
 
-        if (playerCount > dynamicProto.PlayersRequerment)
+        if (playerCount < dynamicProto.PlayersRequerment)
             return false;
 
         selectedDynamic = currentDynamic;
         return true;
+
     }
 
 

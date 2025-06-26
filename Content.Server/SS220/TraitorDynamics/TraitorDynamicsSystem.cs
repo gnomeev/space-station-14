@@ -1,6 +1,7 @@
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
+using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
@@ -13,8 +14,15 @@ using Robust.Shared.Random;
 namespace Content.Server.SS220.TraitorDynamics;
 
 /// <summary>
-/// This handles...
+/// Handles the dynamic antagonist system that controls round-specific scenarios, role distribution, and economic adjustments.
 /// </summary>
+/// <remarks>
+/// This system manages:
+/// - Selection and configuration of dynamic scenarios (Dynamics) based on player count
+/// - Adjustment of antagonist role limits per game rule
+/// - Dynamic-specific pricing and discounts in stores
+/// - Round-end reporting of active dynamic
+/// </remarks>
 public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 {
     [Dependency] private readonly AntagSelectionSystem _antag = default!;
@@ -23,6 +31,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
     [Dependency] private readonly StoreDiscountSystem _discount = default!;
     [Dependency] private readonly IAdminLogManager _admin = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
+    [Dependency] private readonly IChatManager _chatManager = default!;
 
     [ValidatePrototypeId<StoreCategoryPrototype>]
     private const string DiscountedStoreCategoryPrototypeKey = "DiscountedItems";
@@ -116,6 +125,9 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         return finalPrice;
     }
 
+    /// <summary>
+    /// Gets and sets a random dynamic based on the current number of ready players.
+    /// </summary>
     public void SetRandomDynamic()
     {
         var countPlayers = _gameTicker.ReadyPlayerCount();
@@ -123,6 +135,10 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         SetDynamic(dynamic);
     }
 
+    /// <summary>
+    /// Sets the specified dynamic of DynamicPrototype
+    /// </summary>
+    /// <param name="proto"> The prototype ID of the dynamic mode </param>
     public void SetDynamic(string proto)
     {
         if (!_prototype.TryIndex<DynamicPrototype>(proto, out var dynamicProto, true))
@@ -136,6 +152,9 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
 
         CurrentDynamic = dynamicProto;
         _admin.Add(LogType.AntagSelection, LogImpact.High, $"Dynamic {dynamicProto.Name} was setted"); // TODO: log type must be changed
+
+        var locName = Loc.GetString(dynamicProto.Name);
+        _chatManager.SendAdminAnnouncement(Loc.GetString("dynamic-was-set", ("dynamic", locName)));
 
         var ev = new DynamicAddedEvent(dynamicProto.ID);
         RaiseLocalEvent(ev);
