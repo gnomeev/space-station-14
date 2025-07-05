@@ -20,7 +20,8 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions; //SS220-dynamics
+using System.Text.RegularExpressions;
+using Content.Server.SS220.TraitorDynamics; //SS220-dynamics
 using Content.Shared.SS220.TraitorDynamics; //SS220-dynamics
 
 namespace Content.Server.GameTicking.Rules;
@@ -40,7 +41,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly SharedRoleSystem _roleSystem = default!;
     [Dependency] private readonly UplinkSystem _uplink = default!;
-    [Dependency] private readonly SharedTraitorDynamicsSystem _dynamics = default!; //ss220-dynamics-info
+    [Dependency] private readonly TraitorDynamicsSystem _dynamics = default!; //ss220-dynamics-info
     [Dependency] private readonly IPrototypeManager _prototype = default!; //SS220-dynamics
 
     public override void Initialize()
@@ -57,6 +58,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
     {
         base.Added(uid, component, gameRule, args);
         SetCodewords(component, args.RuleEntity);
+        InitDynamic(uid, component); // SS220 Dynamics
     }
 
     private void AfterEntitySelected(Entity<TraitorRuleComponent> ent, ref AfterAntagEntitySelectedEvent args)
@@ -197,7 +199,7 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
         Note[]? code = null;
 
         Log.Debug($"MakeTraitor {ToPrettyString(traitor)} - Uplink add");
-        var uplinked = _uplink.AddUplink(traitor, startingBalance, pda, true);
+        var uplinked = _uplink.AddUplink(traitor, startingBalance, pda, true, true); // SS220 Dynamics
 
         if (pda is not null && uplinked)
         {
@@ -298,4 +300,31 @@ public sealed class TraitorRuleSystem : GameRuleSystem<TraitorRuleComponent>
 
         return traitors;
     }
+
+    // SS220 Dynamics begin
+    private bool InitDynamic(EntityUid ent, TraitorRuleComponent? rule)
+    {
+        if (!Resolve(ent, ref rule))
+            return false;
+
+        if (!rule.UseDynamics)
+            return false;
+
+        if (rule.Dynamic != null)
+        {
+            _dynamics.SetDynamic(rule.Dynamic);
+            return true;
+        }
+
+        var dynamic = _dynamics.GetCurrentDynamic();
+        if (dynamic != null)
+        {
+            _adminLogger.Add(LogType.EventStarted, LogImpact.Low, $"Can't set random dynamic because it's already was setted");
+            return false;
+        }
+
+        _dynamics.SetRandomDynamic();
+        return true;
+    }
+    // SS220 Dynamics end
 }

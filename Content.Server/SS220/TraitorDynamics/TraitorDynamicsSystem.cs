@@ -1,15 +1,18 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 
+using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
+using Content.Server.Store.Systems;
 using Content.Server.StoreDiscount.Systems;
 using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.SS220.TraitorDynamics;
 using Content.Shared.Store;
+using Content.Shared.Store.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 
@@ -34,6 +37,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
     [Dependency] private readonly IAdminLogManager _admin = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IChatManager _chatManager = default!;
+    [Dependency] private readonly StoreSystem _store = default!;
 
     [ValidatePrototypeId<StoreCategoryPrototype>]
     private const string DiscountedStoreCategoryPrototypeKey = "DiscountedItems";
@@ -43,16 +47,7 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
         base.Initialize();
 
         SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndAppend);
-        SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded);
-        SubscribeLocalEvent<StoreInitializedEvent>(OnStoreInit,  before: [typeof(StoreDiscountSystem)]);
-    }
-
-    private void OnStoreInit(ref StoreInitializedEvent ev)
-    {
-        if (CurrentDynamic == null)
-            return;
-
-        ApplyDynamicPrice(ev.Store, ev.Listings, CurrentDynamic.Value);
+        SubscribeLocalEvent<DynamicAddedEvent>(OnDynamicAdded, before: [typeof(StoreDiscountSystem)]);
     }
 
     private void OnDynamicAdded(DynamicAddedEvent ev)
@@ -69,6 +64,19 @@ public sealed class TraitorDynamicsSystem : SharedTraitorDynamicsSystem
                 continue;
 
             _antag.SetMaxAntags(selection, value);
+        }
+
+        var query = EntityQueryEnumerator<StoreComponent>();
+        while (query.MoveNext(out var store, out var comp))
+        {
+            if (!comp.UseDynamicPrices)
+                continue;
+
+            if (comp.AccountOwner == null)
+                return;
+
+            var listings = _store.GetAvailableListings(comp.AccountOwner.Value, store, comp).ToArray();
+            ApplyDynamicPrice(store, listings, dynamic.ID);
         }
     }
 

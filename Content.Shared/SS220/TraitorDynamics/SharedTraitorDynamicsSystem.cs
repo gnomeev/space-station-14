@@ -50,8 +50,8 @@ public abstract class SharedTraitorDynamicsSystem : EntitySystem
 
             if (TrySelectDynamic(currentDynamic, dynamicProto, playerCount, out selectedDynamic))
                 break;
-            else
-                tempWeight.Weights.Remove(currentDynamic);
+
+            tempWeight.Weights.Remove(currentDynamic);
         }
 
         return selectedDynamic;

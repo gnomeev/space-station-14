@@ -93,6 +93,18 @@ namespace Content.Server.Traitor.Uplink.Commands
                 }
             }
 
+            //ss220
+            var useDynamics = false;
+            if (args.Length >= 4)
+            {
+                if (!bool.TryParse(args[3], out useDynamics))
+                {
+                    shell.WriteLine(Loc.GetString("shell-invalid-bool"));
+                    return;
+                }
+            }
+            //ss220
+
             // Finally add uplink
             var uplinkSys = _entManager.System<UplinkSystem>();
 
@@ -100,7 +112,7 @@ namespace Content.Server.Traitor.Uplink.Commands
 
             uplinkEntity ??= uplinkSys.FindUplinkTarget(user);
 
-            if (uplinkSys.AddUplink(user, 20, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted))
+            if (uplinkSys.AddUplink(user, 20, uplinkEntity: uplinkEntity, giveDiscounts: isDiscounted, useDynamics))
             {
                 if (uplinkEntity != null)
                     uplinkSys.GenerateCodeAndOpenUplink(uplinkEntity.Value);
