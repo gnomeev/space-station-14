@@ -1,0 +1,32 @@
+# © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
+
+- type: entity
+  name: retro laser blaster
+  parent: [ BaseWeaponBatterySmall] #SS220-delete-contraband
+  id: WeaponChargeLaserGun
+  description: brr brr potapim needs new description
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Battery/laser_retro.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
+  - type: Item
+    storedOffset: 0,-5
+  - type: HitscanBatteryAmmoProvider
+    proto: RedMediumLaser
+    fireCost: 62.5
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Appearance
+  - type: ChargeGun
+    chargeTime: 3
+    ammoPerCharge: 5
+    damagePerCharge:
+      types:
+        Piercing: 14
