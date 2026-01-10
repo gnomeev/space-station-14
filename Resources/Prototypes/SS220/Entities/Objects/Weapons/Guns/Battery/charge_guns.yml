@@ -2,7 +2,7 @@
 
 - type: entity
   name: retro laser blaster
-  parent: [ BaseWeaponBatterySmall] #SS220-delete-contraband
+  parent: [ BaseWeaponBatterySmall]
   id: WeaponChargeLaserGun
   description: brr brr potapim needs new description
   components:
@@ -25,8 +25,8 @@
     zeroVisible: true
   - type: Appearance
   - type: ChargeGun
-    chargeTime: 3
+    chargeTime: 2
     ammoPerCharge: 5
     damagePerCharge:
       types:
-        Piercing: 14
+        Heat: 30

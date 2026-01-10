@@ -719,3 +719,9 @@ binds:
   key: P
   mod1: Alt
 # SS220 add pinnable ui func end
+# SS220 ItemOffer bind begin
+- function: ChargeGun
+  type: State
+  key: Y
+  mod1: Shift
+# SS220 ItemOffer bind end

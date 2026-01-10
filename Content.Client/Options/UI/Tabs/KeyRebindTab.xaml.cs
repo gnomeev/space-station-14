@@ -191,6 +191,7 @@ namespace Content.Client.Options.UI.Tabs
             AddButton(ContentKeyFunctions.AltActivateItemInWorld);
             AddButton(ContentKeyFunctions.Drop);
             AddButton(KeyFunctions220.ItemOffer); // SS220 ItemOffer bind
+            AddButton(KeyFunctions220.ChargeGun); // SS220 ChargeGun
             AddButton(ContentKeyFunctions.ExamineEntity);
             AddButton(ContentKeyFunctions.SwapHands);
             AddButton(ContentKeyFunctions.SwapHandsReverse);

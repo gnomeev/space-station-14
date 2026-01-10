@@ -61,6 +61,7 @@ namespace Content.Client.Input
             human.AddFunction(ContentKeyFunctions.SwapHandsReverse);
             human.AddFunction(ContentKeyFunctions.Drop);
             human.AddFunction(KeyFunctions220.ItemOffer); // SS220 ItemOffer bind
+            human.AddFunction(KeyFunctions220.ChargeGun); // SS220 ChargeGun
             human.AddFunction(ContentKeyFunctions.UseItemInHand);
             human.AddFunction(ContentKeyFunctions.AltUseItemInHand);
             human.AddFunction(ContentKeyFunctions.OpenCharacterMenu);

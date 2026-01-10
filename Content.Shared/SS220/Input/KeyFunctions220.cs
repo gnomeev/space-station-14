@@ -27,6 +27,8 @@ public static class KeyFunctions220
     public static readonly BoundKeyFunction ResistFire = "ResistFire";
     public static readonly BoundKeyFunction PinUI = "PinUI";
 
+    public static readonly BoundKeyFunction ChargeGun = "ChargeGun";
+
     public static void AddCalculatorKeys(IInputCmdContext context)
     {
         context.AddFunction(CalculatorType0);

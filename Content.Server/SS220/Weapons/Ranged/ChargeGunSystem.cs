@@ -1,13 +1,17 @@
 // © SS220, An EULA/CLA with a hosting restriction, full text: https://raw.githubusercontent.com/SerbiaStrong-220/space-station-14/master/CLA.txt
 using Content.Server.Popups;
+using Content.Server.Hands.Systems;
 using Content.Server.Weapons.Ranged.Systems;
-using Content.Shared.Projectiles;
+using Content.Shared.CombatMode;
+using Content.Shared.SS220.Input;
 using Content.Shared.Weapons.Ranged;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
-using Content.Shared.Weapons.Ranged.Systems;
+using Robust.Shared.Input.Binding;
+using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
+using Content.Shared.Hands.Components;
 
 namespace Content.Server.SS220.Weapons.Ranged;
 
@@ -15,15 +19,39 @@ public sealed partial class ChargeGunSystem : EntitySystem
 {
     [Dependency] private readonly GunSystem _gun = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
-    [Dependency] private readonly PrototypeManager _proto = default!;
+    [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly PopupSystem _popup = default!;
+    [Dependency] private readonly HandsSystem _hands = default!;
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeLocalEvent<ChargeGunComponent, AttemptShootEvent>(OnShootAttempt);
         SubscribeLocalEvent<ChargeGunComponent, GunRefreshModifiersEvent>(OnRefreshModifiers);
+
+        CommandBinds.Builder
+        .Bind(KeyFunctions220.ChargeGun, InputCmdHandler.FromDelegate(HandleChargeGun))
+        .Register<ChargeGunSystem>();
     }
 
+    private void HandleChargeGun(ICommonSession? session)
+    {
+        if (session?.AttachedEntity is not { Valid: true } player)
+            return;
+
+        if (!TryComp<CombatModeComponent>(player, out var combatMode))
+            return;
+
+        if (!combatMode.IsInCombatMode)
+            return;
+
+        var heldEnt = _hands.GetActiveItem(player);
+
+        if (heldEnt is null)
+            return;
+
+        if (TryComp<ChargeGunComponent>(heldEnt, out var chargeComp))
+            ChargeGun(chargeComp);
+
+    }
     private void OnRefreshModifiers(Entity<ChargeGunComponent> ent, ref GunRefreshModifiersEvent args)
     {
         if (ent.Comp.Modifiers is not { } modifiers)
@@ -42,13 +70,6 @@ public sealed partial class ChargeGunSystem : EntitySystem
         args.ProjectileSpeed = modifiers.ProjectileSpeed ?? gunComponent.ProjectileSpeed;
     }
 
-    private void OnShootAttempt(Entity<ChargeGunComponent> ent, ref AttemptShootEvent args)
-    {
-        var curTime = _timing.CurTime;
-        ent.Comp.Charging = true;
-        ent.Comp.ChargeUntil = curTime + ent.Comp.ChargeTime;
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -60,7 +81,7 @@ public sealed partial class ChargeGunSystem : EntitySystem
             if (!TryComp<GunComponent>(ent, out var gunComponent))
                 continue;
 
-            if (chargeComp.Charging == false)
+            if (!chargeComp.Charging)
                 continue;
 
             if (chargeComp.CurChargesCount >= chargeComp.MaxChargesCount)
@@ -96,5 +117,17 @@ public sealed partial class ChargeGunSystem : EntitySystem
 
         if (h != null)
             h += chargeComp.DamagePerCharge * chargeComp.CurChargesCount;
+    }
+
+    private void ChargeGun(ChargeGunComponent chargeComp)
+    {
+        var curTime = _timing.CurTime;
+        chargeComp.Charging = true;
+        chargeComp.ChargeUntil = curTime + chargeComp.ChargeTime;
+    }
+
+    public bool TryChargeGun(ChargeGunComponent chargeComp)
+    {
+        return true;
     }
 }
