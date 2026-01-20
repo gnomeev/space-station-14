@@ -26,6 +26,7 @@
   - type: Appearance
   - type: ChargeGun
     chargeTime: 2
+    maxChargeCount: 5
     ammoPerCharge: 5
     damagePerCharge:
       types:

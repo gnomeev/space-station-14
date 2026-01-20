@@ -24,6 +24,7 @@ using Robust.Shared.Utility;
 using Robust.Shared.Containers;
 using Content.Shared.SS220.Weapons.Ranged.Events;
 using Content.Server.SS220.Shuttles.UI;
+using Content.Server.SS220.Weapons.Ranged.Events;
 
 namespace Content.Server.Weapons.Ranged.Systems;
 
@@ -247,6 +248,10 @@ public sealed partial class GunSystem : SharedGunSystem
                                 _stamina.TakeStaminaDamage(hitEntity, hitscan.StaminaDamage, source: user);
 
                             var dmg = hitscan.Damage;
+                            // ss220 chargegun
+                            var hitscanDmgEv = new BeforeHitscanDamageEvent(dmg, hitEntity, gunUid);
+                            RaiseLocalEvent(gunUid, ref hitscanDmgEv);
+                            // ss220 chargegun
 
                             var hitName = ToPrettyString(hitEntity);
                             if (dmg != null)

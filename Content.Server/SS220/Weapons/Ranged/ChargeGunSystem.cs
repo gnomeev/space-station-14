@@ -11,7 +11,8 @@ using Robust.Shared.Input.Binding;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Content.Shared.Hands.Components;
+using Content.Shared.Damage;
+using Content.Server.SS220.Weapons.Ranged.Events;
 
 namespace Content.Server.SS220.Weapons.Ranged;
 
@@ -26,10 +27,30 @@ public sealed partial class ChargeGunSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<ChargeGunComponent, GunRefreshModifiersEvent>(OnRefreshModifiers);
+        SubscribeLocalEvent<ChargeGunComponent, SelfBeforeGunShotEvent>(OnBeforeShot);
+        SubscribeLocalEvent<ChargeGunComponent, TakeAmmoEvent>(OnTakeAmmo);
+        SubscribeLocalEvent<ChargeGunComponent, BeforeHitscanDamageEvent>(BeforeHitscanDamage);
 
         CommandBinds.Builder
         .Bind(KeyFunctions220.ChargeGun, InputCmdHandler.FromDelegate(HandleChargeGun))
         .Register<ChargeGunSystem>();
+    }
+
+    private void BeforeHitscanDamage(Entity<ChargeGunComponent> ent, ref BeforeHitscanDamageEvent args)
+    {
+        if (!HasComp<HitscanBatteryAmmoProviderComponent>(ent))
+            return;
+
+        if (args.Damage != null)
+            args.Damage += ent.Comp.DamagePerCharge * ent.Comp.CurChargesCount;
+    }
+
+    private void OnTakeAmmo(Entity<ChargeGunComponent> ent, ref TakeAmmoEvent args)
+    {
+    }
+
+    private void OnBeforeShot(Entity<ChargeGunComponent> ent, ref SelfBeforeGunShotEvent args)
+    {
     }
 
     private void HandleChargeGun(ICommonSession? session)
@@ -73,10 +94,10 @@ public sealed partial class ChargeGunSystem : EntitySystem
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
-        var query = EntityQueryEnumerator<ChargeGunComponent, BasicEntityAmmoProviderComponent>();
+        var query = EntityQueryEnumerator<ChargeGunComponent>();
         var curTime = _timing.CurTime;
 
-        while (query.MoveNext(out var ent, out var chargeComp, out var ammoComp))
+        while (query.MoveNext(out var ent, out var chargeComp))
         {
             if (!TryComp<GunComponent>(ent, out var gunComponent))
                 continue;
@@ -87,15 +108,7 @@ public sealed partial class ChargeGunSystem : EntitySystem
             if (chargeComp.CurChargesCount >= chargeComp.MaxChargesCount)
                 continue;
 
-            if (ammoComp.Count <= 0)
-                continue;
-
             if (chargeComp.ChargeUntil > curTime)
-                continue;
-
-            var newAmmo = ammoComp.Count - chargeComp.AmmoPerCharge;
-
-            if (newAmmo < 0)
                 continue;
 
             chargeComp.CurChargesCount++;
@@ -110,13 +123,6 @@ public sealed partial class ChargeGunSystem : EntitySystem
     private void UpdateGunModifiers(Entity<GunComponent?> ent, ChargeGunComponent chargeComp)
     {
         _gun.RefreshModifiers(ent);
-        if (!TryComp<HitscanBatteryAmmoProviderComponent>(ent, out var batteryAmmo))
-            return;
-
-        var h = _proto.Index<HitscanPrototype>(batteryAmmo.Prototype).Damage;
-
-        if (h != null)
-            h += chargeComp.DamagePerCharge * chargeComp.CurChargesCount;
     }
 
     private void ChargeGun(ChargeGunComponent chargeComp)
@@ -126,8 +132,8 @@ public sealed partial class ChargeGunSystem : EntitySystem
         chargeComp.ChargeUntil = curTime + chargeComp.ChargeTime;
     }
 
-    public bool TryChargeGun(ChargeGunComponent chargeComp)
+    public void ChangeChargingState(ChargeGunComponent chargeComp)
     {
-        return true;
+        chargeComp.Charging = !chargeComp.Charging;
     }
 }
