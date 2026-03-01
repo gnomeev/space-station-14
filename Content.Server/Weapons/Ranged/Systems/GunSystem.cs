@@ -251,6 +251,9 @@ public sealed partial class GunSystem : SharedGunSystem
                             // ss220 chargegun
                             var hitscanDmgEv = new BeforeHitscanDamageEvent(dmg, hitEntity, gunUid);
                             RaiseLocalEvent(gunUid, ref hitscanDmgEv);
+
+                            if (hitscanDmgEv.Damage != null && dmg != null)
+                                dmg += hitscanDmgEv.Damage;
                             // ss220 chargegun
 
                             var hitName = ToPrettyString(hitEntity);

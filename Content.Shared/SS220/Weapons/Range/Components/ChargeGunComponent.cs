@@ -28,6 +28,9 @@ public sealed partial class ChargeGunComponent : Component
     public int CurChargesCount;
 
     [DataField]
+    public int ChargesPerShot;
+
+    [DataField]
     public DamageSpecifier DamagePerCharge = new();
 
     [DataField]
