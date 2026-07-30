@@ -6,16 +6,6 @@
       \u043E\u0432\u0430\u044F \u043A\u0430\u0440\u0442\u0430 Nightshift \u0434\u043E\
       \ 30 \u0447\u0435\u043B\u043E\u0432\u0435\u043A!"
     type: Add
-  id: 1136
-  time: '2025-09-02T15:30:34.0000000+00:00'
-  url: https://github.com/SerbiaStrong-220/space-station-14/pull/2312
-- author: VictorBoum, AliceValestray, rtmfool, murraingif, NightmareStalker, thorofare,
-    PorteRianes, Vnoeg
-  changes:
-  - message: "\u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u0430 \u0438\u0433\u0440\
-      \u043E\u0432\u0430\u044F \u043A\u0430\u0440\u0442\u0430 Nightshift \u0434\u043E\
-      \ 30 \u0447\u0435\u043B\u043E\u0432\u0435\u043A!"
-    type: Add
   id: 1137
   time: '2025-09-10T11:28:04.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/3322
@@ -8754,3 +8744,16 @@
   id: 1635
   time: '2026-07-30T19:46:47.0000000+00:00'
   url: https://github.com/SerbiaStrong-220/space-station-14/pull/4172
+- author: TonyBigShoes
+  changes:
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D \u0437\u0432\u0443\u043A\
+      \ \u043F\u0440\u0438 \u0440\u0430\u0437\u0434\u0435\u043B\u043A\u0435 \u0431\
+      \u0443\u043B\u043E\u0447\u043A\u0438"
+    type: Tweak
+  - message: "\u0418\u0437\u043C\u0435\u043D\u0435\u043D \u0437\u0432\u0443\u043A\
+      \ \u043F\u0440\u0438 \u0440\u0430\u0437\u0434\u0435\u043B\u043A\u0438 \u043E\
+      \u0434\u0435\u0436\u0434\u044B"
+    type: Tweak
+  id: 1636
+  time: '2026-07-30T21:15:45.0000000+00:00'
+  url: https://github.com/SerbiaStrong-220/space-station-14/pull/4444
