@@ -192,6 +192,7 @@
     tags:
     - Sidearm
     - LaserWeapon
+  - type: Akimbo
 
 - type: entity
   name: retro laser blaster
@@ -221,6 +222,7 @@
     tags:
     - Sidearm
     - LaserWeapon
+  - type: Akimbo
 
 - type: entity
   name: makeshift laser pistol
@@ -260,6 +262,7 @@
     tags:
     - Sidearm
     - LaserWeapon
+  - type: Akimbo
 
 - type: entity
   name: tesla gun
@@ -352,6 +355,7 @@
     tags:
     - Sidearm
     - LaserWeapon
+  - type: Akimbo
 
 - type: entity
   name: pulse carbine

@@ -1,0 +1,12 @@
+- type: entity
+  id: ActionAkimboToggle
+  name: Toggle akimbo
+  description: Toggle akimbo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 1
+    icon: Interface/Actions/harmOff.png
+    iconOn: Interface/Actions/harm.png
+  - type: InstantAction
+    event: !type:AkimboToggleActionEvent

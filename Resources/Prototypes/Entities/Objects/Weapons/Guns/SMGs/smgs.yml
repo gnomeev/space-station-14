@@ -89,6 +89,7 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
+  - type: Akimbo
 
 - type: entity
   name: C-20r submachine gun
@@ -300,6 +301,7 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
+  - type: Akimbo
 
 - type: entity
   name: brown briefcase
