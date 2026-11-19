@@ -1,4 +1,4 @@
-namespace Content.Server.SS220.Akimbo;
+namespace Content.Shared.SS220.Akimbo;
 
 [RegisterComponent]
 public sealed partial class AkimboComponent : Component
