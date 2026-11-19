@@ -97,7 +97,7 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
-  - type: Akimbo
+  - type: Akimbo #ss220-akimbo-add
 
 - type: entity
   name: C-20r submachine gun
@@ -324,7 +324,7 @@
     tags:
     - SecBeltEquip
 # SS220-sec-gear-size-fix-end
-  - type: Akimbo
+  - type: Akimbo # ss220-akimbo-add
 
 - type: entity
   name: brown briefcase

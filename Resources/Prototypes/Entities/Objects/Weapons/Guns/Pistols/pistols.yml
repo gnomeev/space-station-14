@@ -82,6 +82,7 @@
     sound:
       path: /Audio/SS220/Items/Weapons/pistol_drop.ogg
   # SS220-place-and-pickup-sounds-2 end
+  - type: Akimbo # ss220-akimbo-add
 
 - type: entity
   name: viper
@@ -116,7 +117,6 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 1000
-  - type: Akimbo
 
 - type: entity
   name: echis
@@ -153,7 +153,6 @@
     autoRefillRate: 2s
     affectedByEmp: true
   - type: AmmoCounter
-  - type: Akimbo
 
 - type: entity
   name: cobra
@@ -204,7 +203,6 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 1500
-  - type: Akimbo
 
 - type: entity
   name: mk 58
@@ -222,11 +220,11 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
   - type: ChamberMagazineAmmoProvider
-    soundBoltClosed: 
+    soundBoltClosed:
       path: /Audio/SS220/Weapons/Guns/Bolt/mk_slide_closed.ogg # SS220 MK Resound by Rivgane
-    soundBoltOpened: 
+    soundBoltOpened:
       path: /Audio/SS220/Weapons/Guns/Bolt/mk_slide_open.ogg # SS220 MK Resound by Rivgane
-    soundRack: 
+    soundRack:
       path: /Audio/SS220/Weapons/Guns/Cock/mk_cock.ogg # SS220 MK Resound by Rivgane
   - type: Item
     storedOffset: 0,-2
@@ -260,7 +258,6 @@
             - CartridgePistol
   - type: StealTarget
     stealGroup: OfficerHandgun
-  - type: Akimbo
 
 - type: entity
   name: N1984
@@ -305,4 +302,3 @@
         whitelist:
           tags:
             - CartridgeMagnum
-  - type: Akimbo
