@@ -371,6 +371,7 @@
     tags:
     - Sidearm
     - LaserWeapon
+  - type: DnaLockable #SS220-dna-lock
   - type: Akimbo
 
 - type: entity
@@ -410,6 +411,7 @@
   - type: Battery
     maxCharge: 5000
     startingCharge: 5000
+  - type: DnaLockable #SS220-dna-lock
 
 - type: entity
   name: pulse rifle
@@ -446,6 +448,7 @@
   - type: Battery
     maxCharge: 40000
     startingCharge: 40000
+  - type: DnaLockable #SS220-dna-lock
 
 - type: entity
   name: laser cannon
@@ -991,6 +994,10 @@
   - type: Battery
     maxCharge: 1200 # SS220-shotgun-battery
     startingCharge: 1200 # SS220-shotgun-battery
+  #SS220-dna-lock begin
+  - type: DnaLockable
+    job: Warden
+  #SS220-dna-lock end
 
 - type: entity
   name: energy magnum
@@ -1040,6 +1047,7 @@
   - type: BatterySelfRecharger
     autoRechargeRate: 48
     autoRechargePauseTime: 10
+  - type: DnaLockable #SS220-dna-lock
 
 - type: entity
   name: temperature gun
